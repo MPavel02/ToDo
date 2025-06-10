@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ToDo.DAL;
 
 namespace ToDo.WebAPI.Controllers;
 
@@ -6,8 +8,10 @@ namespace ToDo.WebAPI.Controllers;
 public class UsersController : ApiBaseController
 {
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll(ToDoDbContext context)
     {
-        return new JsonResult("Good Work");
+        var users = await context.Users.ToListAsync();
+        
+        return new JsonResult(users);
     }
 }
