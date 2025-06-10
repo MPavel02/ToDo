@@ -24,7 +24,7 @@ namespace ToDo.DAL.Migrations
 
             modelBuilder.Entity("ToDo.Domain.Entities.UserEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -38,7 +38,7 @@ namespace ToDo.DAL.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Users");
                 });

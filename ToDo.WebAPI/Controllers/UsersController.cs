@@ -15,6 +15,14 @@ public class UsersController(IUserService userService) : ApiBaseController
         return Ok(result);
     }
     
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetByID(Guid id)
+    {
+        var result = await userService.GetByID(id);
+        
+        return Ok(result);
+    }
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -22,4 +30,22 @@ public class UsersController(IUserService userService) : ApiBaseController
         
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update(UserDto userDto)
+    {
+        var result = await userService.Update(userDto);
+        
+        return Ok(result);
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await userService.Delete(id);
+        
+        return Ok(result);
+    }
+    
+    
 }

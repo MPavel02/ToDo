@@ -9,7 +9,7 @@ public static class UsersMapper
     {
         return new UserDto
         {
-            Id = entity.Id,
+            ID = entity.ID,
             Name = entity.Name
         };
     }

@@ -2,5 +2,5 @@
 
 public class UserDto : CreateUserDto
 {
-    public Guid Id { get; set; }
+    public Guid ID { get; set; }
 }
