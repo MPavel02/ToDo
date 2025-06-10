@@ -7,7 +7,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder
     .AddSwagger()
-    .AddData();
+    .AddData()
+    .AddApplicationServices();
 
 var app = builder.Build();
 

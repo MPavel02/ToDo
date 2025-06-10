@@ -12,7 +12,7 @@ using ToDo.DAL;
 namespace ToDo.DAL.Migrations
 {
     [DbContext(typeof(ToDoDbContext))]
-    [Migration("20250610120611_Initial")]
+    [Migration("20250610154016_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

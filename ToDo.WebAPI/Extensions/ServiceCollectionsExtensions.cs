@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ToDo.Application.Interfaces;
+using ToDo.Application.Services;
 using ToDo.DAL;
 
 namespace ToDo.WebAPI.Extensions;
@@ -52,6 +54,13 @@ public static class ServiceCollectionsExtensions
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
             opt.UseNpgsql(builder.Configuration.GetConnectionString(SettingsDatabaseParam)));
+            
+        return builder;
+    }
+    
+    public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IUserService, UserService>();
             
         return builder;
     }

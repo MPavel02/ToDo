@@ -1,17 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ToDo.DAL;
+using ToDo.Application.Interfaces;
+using ToDo.Domain.Models.Users;
 
 namespace ToDo.WebAPI.Controllers;
 
 [Route("api/v1/[controller]")]
-public class UsersController : ApiBaseController
+public class UsersController(IUserService userService) : ApiBaseController
 {
-    [HttpGet]
-    public async Task<IActionResult> GetAll(ToDoDbContext context)
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateUserDto userDto)
     {
-        var users = await context.Users.ToListAsync();
+        var result = await userService.Create(userDto);
         
-        return new JsonResult(users);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await userService.GetAll();
+        
+        return Ok(result);
     }
 }

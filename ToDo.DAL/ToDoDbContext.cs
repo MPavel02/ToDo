@@ -7,10 +7,11 @@ public sealed class ToDoDbContext : DbContext
 {
     public ToDoDbContext(DbContextOptions<ToDoDbContext> options) : base(options)
     {
-        if (Database.GetPendingMigrations().Any())
-        {
-            Database.Migrate();
-        }
+        Database.EnsureCreated();
+        // if (Database.GetPendingMigrations().Any())
+        // {
+        //     Database.Migrate();
+        // }
     }
     
     public DbSet<UserEntity> Users { get; set; } = null!;
