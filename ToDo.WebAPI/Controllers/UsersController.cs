@@ -1,51 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Interfaces;
-using ToDo.Domain.Models.Users;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ToDo.Application.Mappers;
+using ToDo.Application.Users.Commands.DeleteCommand;
+using ToDo.Application.Users.Queries.GetAllUsers;
+using ToDo.Application.Users.Queries.GetUserByID;
+using ToDo.Domain.Models.User;
 
 namespace ToDo.WebAPI.Controllers;
 
 [Route("api/v1/[controller]")]
-public class UsersController(IUserService userService) : ApiBaseController
+public class UsersController(IMediator mediator) : ApiBaseController
 {
     [HttpPost]
-    public async Task<IActionResult> Create(CreateUserDto userDto)
+    public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto, CancellationToken cancellationToken = default)
     {
-        var result = await userService.Create(userDto);
+        var result = await mediator.Send(createUserDto.Map(), cancellationToken);
         
         return Ok(result);
     }
     
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetByID(Guid id)
+    public async Task<IActionResult> GetByID(Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await userService.GetByID(id);
+        var query = new GetUserByIDQuery { ID = id };
+        var result = await mediator.Send(query, cancellationToken);
         
         return Ok(result);
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
     {
-        var result = await userService.GetAll();
+        var query = new GetUserListQuery();
+        var result = await mediator.Send(query, cancellationToken);
         
         return Ok(result);
     }
     
     [HttpPut]
-    public async Task<IActionResult> Update(UserDto userDto)
+    public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken = default)
     {
-        var result = await userService.Update(userDto);
+        await mediator.Send(updateUserDto.Map(), cancellationToken);
         
-        return Ok(result);
+        return NoContent();
     }
     
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await userService.Delete(id);
+        var command = new DeleteUserCommand { ID = id };
+        await mediator.Send(command, cancellationToken);
         
-        return Ok(result);
+        return NoContent();
     }
-    
-    
 }

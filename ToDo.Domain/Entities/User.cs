@@ -1,6 +1,6 @@
 ﻿namespace ToDo.Domain.Entities;
 
-public class UserEntity : BaseEntity
+public class User : BaseEntity
 {
     public required string Name { get; set; }
 }

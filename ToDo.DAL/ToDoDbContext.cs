@@ -14,5 +14,5 @@ public sealed class ToDoDbContext : DbContext
         // }
     }
     
-    public DbSet<UserEntity> Users { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
 }
