@@ -15,4 +15,5 @@ public sealed class ToDoDbContext : DbContext
     }
     
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Note> Notes { get; set; } = null!;
 }

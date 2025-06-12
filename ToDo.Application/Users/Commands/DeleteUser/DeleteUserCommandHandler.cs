@@ -4,7 +4,7 @@ using ToDo.Application.Exceptions;
 using ToDo.DAL;
 using ToDo.Domain.Entities;
 
-namespace ToDo.Application.Users.Commands.DeleteCommand;
+namespace ToDo.Application.Users.Commands.DeleteUser;
 
 public class DeleteUserCommandHandler(ToDoDbContext context) : IRequestHandler<DeleteUserCommand, Unit>
 {

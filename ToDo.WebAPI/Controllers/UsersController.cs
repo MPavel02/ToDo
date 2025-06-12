@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Application.Mappers;
-using ToDo.Application.Users.Commands.DeleteCommand;
+using ToDo.Application.Users.Commands.DeleteUser;
 using ToDo.Application.Users.Queries.GetAllUsers;
 using ToDo.Application.Users.Queries.GetUserByID;
 using ToDo.Domain.Models.User;

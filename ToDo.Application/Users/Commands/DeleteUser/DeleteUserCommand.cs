@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ToDo.Application.Users.Commands.DeleteCommand;
+namespace ToDo.Application.Users.Commands.DeleteUser;
 
 public class DeleteUserCommand : IRequest<Unit>
 {
