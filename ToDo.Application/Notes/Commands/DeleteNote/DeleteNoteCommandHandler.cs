@@ -14,7 +14,7 @@ public class DeleteNoteCommandHandler(ToDoDbContext context) : IRequestHandler<D
             .Include(note => note.User)
             .FirstOrDefaultAsync(note => note.ID == request.ID, cancellationToken);
 
-        if (note is null || note.User.ID != request.UserID)
+        if (note is null || note.UserID != request.UserID)
         {
             throw new NotFoundException(nameof(Note), request.ID);
         }

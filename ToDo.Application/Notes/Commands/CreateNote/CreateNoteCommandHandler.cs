@@ -22,7 +22,7 @@ public class CreateNoteCommandHandler(ToDoDbContext context) : IRequestHandler<C
             ID = Guid.NewGuid(),
             Title = request.Title,
             Details = request.Details,
-            User = user
+            UserID = user.ID
         };
         
         await context.Notes.AddAsync(note, cancellationToken);
