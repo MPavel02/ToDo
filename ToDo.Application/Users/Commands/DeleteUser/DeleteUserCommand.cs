@@ -2,7 +2,7 @@
 
 namespace ToDo.Application.Users.Commands.DeleteUser;
 
-public class DeleteUserCommand : IRequest<Unit>
+public class DeleteUserCommand(Guid ID) : IRequest<Unit>
 {
-    public Guid ID { get; set; }
+    public Guid ID { get; } = ID;
 }

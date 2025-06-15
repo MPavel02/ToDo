@@ -3,7 +3,7 @@ using ToDo.Domain.Models.User;
 
 namespace ToDo.Application.Users.Queries.GetUserByID;
 
-public class GetUserByIDQuery : IRequest<UserModel>
+public class GetUserByIDQuery(Guid ID) : IRequest<UserModel>
 {
-    public Guid ID { get; set; }
+    public Guid ID { get; } = ID;
 }

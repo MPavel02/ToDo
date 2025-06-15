@@ -22,8 +22,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetByID(Guid id, CancellationToken cancellationToken = default)
     {
-        var query = new GetUserByIDQuery { ID = id };
-        var result = await mediator.Send(query, cancellationToken);
+        var result = await mediator.Send(new GetUserByIDQuery(id), cancellationToken);
         
         return Ok(result);
     }
@@ -31,8 +30,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
     {
-        var query = new GetUserListQuery();
-        var result = await mediator.Send(query, cancellationToken);
+        var result = await mediator.Send(new GetUserListQuery(), cancellationToken);
         
         return Ok(result);
     }
@@ -48,8 +46,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
-        var command = new DeleteUserCommand { ID = id };
-        await mediator.Send(command, cancellationToken);
+        await mediator.Send(new DeleteUserCommand(id), cancellationToken);
         
         return NoContent();
     }

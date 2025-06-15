@@ -3,4 +3,4 @@ using ToDo.Domain.Models.User;
 
 namespace ToDo.Application.Users.Queries.GetAllUsers;
 
-public class GetUserListQuery : IRequest<UserListModel> { }
+public class GetUserListQuery : IRequest<UserListModel>;
