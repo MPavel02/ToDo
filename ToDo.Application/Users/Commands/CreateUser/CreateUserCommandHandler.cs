@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using ToDo.DAL;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Commands.CreateUser;
 
-public class CreateUserCommandHandler(ToDoDbContext context) : IRequestHandler<CreateUserCommand, Guid>
+public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Guid>
 {
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
@@ -14,8 +14,7 @@ public class CreateUserCommandHandler(ToDoDbContext context) : IRequestHandler<C
             Name = request.Name
         };
         
-        await context.Users.AddAsync(user, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+        await userRepository.AddAsync(user, cancellationToken);
 
         return user.ID;
     }

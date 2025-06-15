@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ToDo.DAL;
+using ToDo.DAL.Repositories;
+using ToDo.Domain.Repositories;
 
 namespace ToDo.WebAPI.Extensions;
 
@@ -67,6 +69,8 @@ public static class ServiceCollectionsExtensions
     
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        
         return builder;
     }
 }

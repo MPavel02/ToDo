@@ -1,16 +1,15 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ToDo.Application.Exceptions;
-using ToDo.DAL;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Commands.UpdateUser;
 
-public class UpdateUserCommandHandler(ToDoDbContext context) : IRequestHandler<UpdateUserCommand, Unit>
+public class UpdateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<UpdateUserCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await context.Users.FirstOrDefaultAsync(user => user.ID == request.ID, cancellationToken);
+        var user = await userRepository.GetByIDAsync(request.ID, cancellationToken);
 
         if (user is null)
         {
@@ -20,7 +19,7 @@ public class UpdateUserCommandHandler(ToDoDbContext context) : IRequestHandler<U
         user.Name = request.Name;
         user.UpdatedAt = DateTime.UtcNow;
         
-        await context.SaveChangesAsync(cancellationToken);
+        await userRepository.UpdateAsync(user, cancellationToken);
         
         return Unit.Value;
     }
