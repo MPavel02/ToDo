@@ -1,16 +1,16 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using ToDo.Application.Exceptions;
-using ToDo.DAL;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Exceptions;
+using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Commands.CreateNote;
 
-public class CreateNoteCommandHandler(ToDoDbContext context) : IRequestHandler<CreateNoteCommand, Guid>
+public class CreateNoteCommandHandler(IUserRepository userRepository, INoteRepository noteRepository)
+    : IRequestHandler<CreateNoteCommand, Guid>
 {
     public async Task<Guid> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
     {
-        var user = await context.Users.FirstOrDefaultAsync(user => user.ID == request.UserID, cancellationToken);
+        var user = await userRepository.GetByIDAsync(request.UserID, cancellationToken);
 
         if (user is null)
         {
@@ -25,8 +25,7 @@ public class CreateNoteCommandHandler(ToDoDbContext context) : IRequestHandler<C
             UserID = user.ID
         };
         
-        await context.Notes.AddAsync(note, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+        await noteRepository.AddAsync(note, cancellationToken);
         
         return note.ID;
     }

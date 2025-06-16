@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using ToDo.Application.Exceptions;
 using ToDo.Application.Mappers;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Exceptions;
 using ToDo.Domain.Models.User;
 using ToDo.Domain.Repositories;
 

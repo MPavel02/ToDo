@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDo.DAL.ModelConfigurations;
+using ToDo.DAL.Persistence.Configurations;
 using ToDo.Domain.Entities;
 
-namespace ToDo.DAL;
+namespace ToDo.DAL.Persistence;
 
 public sealed class ToDoDbContext : DbContext
 {

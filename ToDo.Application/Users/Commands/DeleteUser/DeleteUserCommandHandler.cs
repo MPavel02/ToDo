@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using ToDo.Application.Exceptions;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Commands.DeleteUser;

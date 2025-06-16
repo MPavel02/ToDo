@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ToDo.Domain.Entities;
 
-namespace ToDo.DAL.ModelConfigurations;
+namespace ToDo.DAL.Persistence.Configurations;
 
 internal class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseEntity
 {

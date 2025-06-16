@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ToDo.DAL;
+using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
 using ToDo.Domain.Repositories;
 
@@ -54,7 +55,7 @@ public static class ServiceCollectionsExtensions
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
             opt.UseNpgsql(builder.Configuration.GetConnectionString(SettingsDatabaseParam)));
-            
+
         return builder;
     }
     
@@ -70,7 +71,8 @@ public static class ServiceCollectionsExtensions
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
-        
+        builder.Services.AddScoped<INoteRepository, NoteRepository>();
+
         return builder;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDo.DAL.Persistence;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Repositories;
 
@@ -16,21 +17,21 @@ public class UserRepository(ToDoDbContext context) : IUserRepository
         return await context.Users.ToListAsync(cancellationToken);
     }
 
-    public async Task AddAsync(User user, CancellationToken cancellationToken = default)
+    public async Task AddAsync(User entity, CancellationToken cancellationToken = default)
     {
-        await context.Users.AddAsync(user, cancellationToken);
+        await context.Users.AddAsync(entity, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(User user, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(User entity, CancellationToken cancellationToken = default)
     {
-        context.Users.Update(user);
+        context.Users.Update(entity);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(User user, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(User entity, CancellationToken cancellationToken = default)
     {
-        context.Users.Remove(user);
+        context.Users.Remove(entity);
         await context.SaveChangesAsync(cancellationToken);
     }
 }
