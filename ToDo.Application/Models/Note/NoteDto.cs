@@ -1,6 +1,6 @@
-﻿namespace ToDo.Domain.Models.Note;
+﻿namespace ToDo.Application.Models.Note;
 
-public class NoteModel
+public class NoteDto
 {
     public Guid ID { get; set; }
     public required string Title { get; set; }

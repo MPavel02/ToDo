@@ -1,15 +1,15 @@
-﻿using MediatR;
-using ToDo.Application.Mappers;
+﻿using Mapster;
+using MediatR;
+using ToDo.Application.Models.User;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Exceptions;
-using ToDo.Domain.Models.User;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Queries.GetUserByID;
 
-public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserByIDQuery, UserModel>
+public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserByIDQuery, UserDto>
 {
-    public async Task<UserModel> Handle(GetUserByIDQuery request, CancellationToken cancellationToken)
+    public async Task<UserDto> Handle(GetUserByIDQuery request, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIDAsync(request.ID, cancellationToken);
 
@@ -18,6 +18,6 @@ public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestH
             throw new NotFoundException(nameof(User), request.ID);
         }
 
-        return user.Map();
+        return user.Adapt<UserDto>();
     }
 }

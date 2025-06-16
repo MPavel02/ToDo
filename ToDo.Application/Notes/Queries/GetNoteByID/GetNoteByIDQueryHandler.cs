@@ -1,15 +1,15 @@
-﻿using MediatR;
-using ToDo.Application.Mappers;
+﻿using Mapster;
+using MediatR;
+using ToDo.Application.Models.Note;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Exceptions;
-using ToDo.Domain.Models.Note;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Queries.GetNoteByID;
 
-public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteByIDQuery, NoteModel>
+public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteByIDQuery, NoteDto>
 {
-    public async Task<NoteModel> Handle(GetNoteByIDQuery request, CancellationToken cancellationToken)
+    public async Task<NoteDto> Handle(GetNoteByIDQuery request, CancellationToken cancellationToken)
     {
         var note = await noteRepository.GetByIDAsync(request.ID, cancellationToken);
 
@@ -18,6 +18,6 @@ public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestH
             throw new NotFoundException(nameof(Note), request.ID);
         }
         
-        return note.Map();
+        return note.Adapt<NoteDto>();
     }
 }

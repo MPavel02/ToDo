@@ -25,7 +25,7 @@ public sealed class ToDoDbContext : DbContext
     
     #endregion
     
-    #region Base Overides
+    #region Base Overrides
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)

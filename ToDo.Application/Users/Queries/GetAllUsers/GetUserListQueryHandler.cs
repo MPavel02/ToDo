@@ -1,6 +1,6 @@
-﻿using MediatR;
-using ToDo.Application.Mappers;
-using ToDo.Domain.Models.User;
+﻿using Mapster;
+using MediatR;
+using ToDo.Application.Models.User;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Queries.GetAllUsers;
@@ -13,7 +13,7 @@ public class GetUserListQueryHandler(IUserRepository userRepository) : IRequestH
 
         return new UserListModel
         {
-            Users = users.Select(user => user.MapToLookup()).ToList(),
+            Users = users.Select(user => user.Adapt<UserLookupDto>()).ToList(),
         };
     }
 }

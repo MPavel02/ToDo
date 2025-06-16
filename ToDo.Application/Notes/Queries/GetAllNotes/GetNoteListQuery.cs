@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ToDo.Domain.Models.Note;
+using ToDo.Application.Models.Note;
 
 namespace ToDo.Application.Notes.Queries.GetAllNotes;
 

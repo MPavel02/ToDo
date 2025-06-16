@@ -1,6 +1,6 @@
-﻿namespace ToDo.Domain.Models.User;
+﻿namespace ToDo.Application.Models.User;
 
-public class UserModel
+public class UserDto
 {
     public Guid ID { get; set; }
     public required string Name { get; set; }

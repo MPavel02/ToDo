@@ -1,4 +1,4 @@
-﻿namespace ToDo.Domain.Models.Note;
+﻿namespace ToDo.Application.Models.Note;
 
 public class NoteLookupDto
 {

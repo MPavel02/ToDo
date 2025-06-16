@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ToDo.Domain.Models.User;
+using ToDo.Application.Models.User;
 
 namespace ToDo.Application.Users.Queries.GetAllUsers;
 

@@ -1,4 +1,4 @@
-﻿namespace ToDo.Domain.Models.Note;
+﻿namespace ToDo.WebAPI.Models.Note;
 
 public class CreateNoteDto
 {

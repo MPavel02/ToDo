@@ -1,4 +1,4 @@
-﻿namespace ToDo.Domain.Models.User;
+﻿namespace ToDo.WebAPI.Models.User;
 
 public class CreateUserDto
 {

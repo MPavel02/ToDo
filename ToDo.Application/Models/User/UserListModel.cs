@@ -1,4 +1,4 @@
-﻿namespace ToDo.Domain.Models.User;
+﻿namespace ToDo.Application.Models.User;
 
 public class UserListModel
 {

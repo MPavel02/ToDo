@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Mappers;
+using ToDo.Application.Users.Commands.CreateUser;
 using ToDo.Application.Users.Commands.DeleteUser;
+using ToDo.Application.Users.Commands.UpdateUser;
 using ToDo.Application.Users.Queries.GetAllUsers;
 using ToDo.Application.Users.Queries.GetUserByID;
-using ToDo.Domain.Models.User;
+using ToDo.WebAPI.Models.User;
 
 namespace ToDo.WebAPI.Controllers;
 
@@ -12,9 +13,12 @@ namespace ToDo.WebAPI.Controllers;
 public class UsersController(IMediator mediator) : ApiBaseController
 {
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Create([FromBody] CreateUserDto request, CancellationToken cancellationToken = default)
     {
-        var result = await mediator.Send(createUserDto.Map(), cancellationToken);
+        var result = await mediator.Send(new CreateUserCommand
+        {
+            Name = request.Name
+        }, cancellationToken);
         
         return Ok(result);
     }
@@ -36,9 +40,13 @@ public class UsersController(IMediator mediator) : ApiBaseController
     }
     
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Update([FromBody] UpdateUserDto request, CancellationToken cancellationToken = default)
     {
-        await mediator.Send(updateUserDto.Map(), cancellationToken);
+        await mediator.Send(new UpdateUserCommand
+        {
+            ID = request.ID,
+            Name = request.Name
+        }, cancellationToken);
         
         return NoContent();
     }

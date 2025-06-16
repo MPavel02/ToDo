@@ -1,6 +1,7 @@
-﻿using MediatR;
-using ToDo.Application.Mappers;
-using ToDo.Domain.Models.Note;
+﻿using Mapster;
+using MediatR;
+using ToDo.Application.Models;
+using ToDo.Application.Models.Note;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Queries.GetAllNotes;
@@ -13,7 +14,7 @@ public class GetNoteListQueryHandler(INoteRepository noteRepository) : IRequestH
         
         return new NoteListModel
         {
-            Notes = notes.Select(user => user.MapToLookup()).ToList(),
+            Notes = notes.Select(note => note.Adapt<NoteLookupDto>()).ToList(),
         };
     }
 }
