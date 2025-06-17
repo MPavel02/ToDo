@@ -1,6 +1,6 @@
 ﻿namespace ToDo.Application.Models.User;
 
-public class UserListModel
+public class UserListDto
 {
     public required IList<UserLookupDto> Users { get; set; }
 }

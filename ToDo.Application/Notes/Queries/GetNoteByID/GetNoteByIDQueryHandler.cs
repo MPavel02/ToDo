@@ -1,5 +1,5 @@
-﻿using Mapster;
-using MediatR;
+﻿using MediatR;
+using ToDo.Application.Mappers;
 using ToDo.Application.Models.Note;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Exceptions;
@@ -18,6 +18,6 @@ public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestH
             throw new NotFoundException(nameof(Note), request.ID);
         }
         
-        return note.Adapt<NoteDto>();
+        return note.Map();
     }
 }

@@ -1,5 +1,5 @@
-﻿using Mapster;
-using MediatR;
+﻿using MediatR;
+using ToDo.Application.Mappers;
 using ToDo.Application.Models.User;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Exceptions;
@@ -18,6 +18,6 @@ public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestH
             throw new NotFoundException(nameof(User), request.ID);
         }
 
-        return user.Adapt<UserDto>();
+        return user.Map();
     }
 }

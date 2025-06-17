@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using ToDo.DAL;
 using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
 using ToDo.Domain.Repositories;

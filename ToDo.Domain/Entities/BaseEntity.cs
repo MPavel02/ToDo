@@ -2,7 +2,37 @@
 
 public abstract class BaseEntity
 {
-    public Guid ID { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // TODO: Домен должен устанавливать значение
-    public DateTime? UpdatedAt { get; set; }
+    private const string ErrorText = "Дата создания не может быть больше чем дата обновления.";
+
+    protected BaseEntity() {}
+
+    protected BaseEntity(Guid ID, DateTime createdAt, DateTime? updatedAt = null)
+    {
+        this.ID = ID;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+    }
+    
+    /// <summary>
+    /// Идентификатор сущности.
+    /// </summary>
+    public Guid ID { get; }
+    
+    /// <summary>
+    /// Дата и время создания.
+    /// </summary>
+    public DateTime CreatedAt { get; }
+
+    /// <summary>
+    /// Дата и время редактирования.
+    /// </summary>
+    public DateTime? UpdatedAt { get; private set; }
+
+    public virtual void SetUpdatedAt(DateTime updatedAt)
+    {
+        if (CreatedAt >= updatedAt)
+            throw new ArgumentException(ErrorText);
+        
+        UpdatedAt = updatedAt;
+    }
 }

@@ -4,6 +4,6 @@ namespace ToDo.Application.Notes.Commands.DeleteNote;
 
 public class DeleteNoteCommand : IRequest<Unit>
 {
-    public Guid ID { get; set; }
-    public Guid UserID { get; set; }
+    public required Guid ID { get; set; }
+    public required Guid UserID { get; set; }
 }

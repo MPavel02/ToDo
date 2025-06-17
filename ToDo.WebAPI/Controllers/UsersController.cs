@@ -17,7 +17,8 @@ public class UsersController(IMediator mediator) : ApiBaseController
     {
         var result = await mediator.Send(new CreateUserCommand
         {
-            Name = request.Name
+            Name = request.Name,
+            Notes = request.Notes
         }, cancellationToken);
         
         return Ok(result);
@@ -45,7 +46,8 @@ public class UsersController(IMediator mediator) : ApiBaseController
         await mediator.Send(new UpdateUserCommand
         {
             ID = request.ID,
-            Name = request.Name
+            Name = request.Name,
+            Notes = request.Notes
         }, cancellationToken);
         
         return NoContent();

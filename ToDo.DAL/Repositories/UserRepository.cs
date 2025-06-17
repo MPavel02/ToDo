@@ -9,12 +9,16 @@ public class UserRepository(ToDoDbContext context) : IUserRepository
 {
     public async Task<User?> GetByIDAsync(Guid ID, CancellationToken cancellationToken = default)
     {
-        return await context.Users.FindAsync([ID], cancellationToken);
+        return await context.Users
+            .Include(user => user.Notes)
+            .FirstOrDefaultAsync(user => user.ID == ID, cancellationToken);
     }
 
     public async Task<IList<User>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await context.Users.ToListAsync(cancellationToken);
+        return await context.Users
+            .Include(user => user.Notes)
+            .ToListAsync(cancellationToken);
     }
 
     public async Task AddAsync(User entity, CancellationToken cancellationToken = default)

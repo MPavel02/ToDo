@@ -17,13 +17,12 @@ public class CreateNoteCommandHandler(IUserRepository userRepository, INoteRepos
             throw new NotFoundException(nameof(User), request.UserID);
         }
 
-        var note = new Note
-        {
-            ID = Guid.NewGuid(),
-            Title = request.Title,
-            Details = request.Details,
-            UserID = user.ID
-        };
+        var note = new Note(
+            Guid.NewGuid(),
+            user.ID,
+            request.Title,
+            request.Details,
+            DateTime.UtcNow);
         
         await noteRepository.AddAsync(note, cancellationToken);
         

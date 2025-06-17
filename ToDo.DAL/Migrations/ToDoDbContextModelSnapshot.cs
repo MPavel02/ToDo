@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ToDo.DAL;
 using ToDo.DAL.Persistence;
 
 #nullable disable
@@ -51,14 +50,9 @@ namespace ToDo.DAL.Migrations
                     b.Property<Guid>("UserID")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("UserID1")
-                        .HasColumnType("uuid");
-
                     b.HasKey("ID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserID1");
 
                     b.ToTable("Notes", (string)null);
                 });
@@ -74,11 +68,6 @@ namespace ToDo.DAL.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreatedAt");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("UpdatedAt");
@@ -91,16 +80,37 @@ namespace ToDo.DAL.Migrations
             modelBuilder.Entity("ToDo.Domain.Entities.Note", b =>
                 {
                     b.HasOne("ToDo.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Notes")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ToDo.Domain.Entities.User", null)
-                        .WithMany("Notes")
-                        .HasForeignKey("UserID1");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ToDo.Domain.Entities.User", b =>
+                {
+                    b.OwnsOne("ToDo.Domain.ValueObjects.Username", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("UserID")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("UserID");
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserID");
+                        });
+
+                    b.Navigation("Name")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ToDo.Domain.Entities.User", b =>

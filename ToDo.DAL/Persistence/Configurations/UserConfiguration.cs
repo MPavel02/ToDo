@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ToDo.Domain.Entities;
+using ToDo.Domain.ValueObjects;
 
 namespace ToDo.DAL.Persistence.Configurations;
 
@@ -10,19 +11,21 @@ namespace ToDo.DAL.Persistence.Configurations;
 internal class UserConfiguration : BaseEntityConfiguration<User>
 {
     /// <inheritdoc />
-    public override void Configure(EntityTypeBuilder<User> entity)
+    public override void Configure(EntityTypeBuilder<User> builder)
     {
-        base.Configure(entity);
+        base.Configure(builder);
 
-        entity.ToTable("Users");
+        builder.ToTable("Users");
         
-        entity.Property(e => e.Name)
-            .HasMaxLength(64)
-            .IsRequired();
-
-        entity.HasMany(m => m.Notes)
-            .WithOne()
+        builder.HasMany(m => m.Notes)
+            .WithOne(o => o.User)
             .HasForeignKey(note => note.UserID)
-            .IsRequired();
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.OwnsOne(user => user.Name, nameBuilder => nameBuilder
+            .Property(name => name.Value)
+                .HasColumnName(nameof(User.Name))
+                .HasMaxLength(Username.MaxLength)
+                .IsRequired());
     }
 }

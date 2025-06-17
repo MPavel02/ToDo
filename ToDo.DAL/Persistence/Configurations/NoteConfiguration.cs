@@ -23,10 +23,5 @@ internal class NoteConfiguration : BaseEntityConfiguration<Note>
         entity.Property(e => e.Details)
             .HasMaxLength(256)
             .IsRequired();
-
-        entity.HasOne(o => o.User)
-            .WithMany()
-            .HasForeignKey(note => note.UserID)
-            .IsRequired();
     }
 }

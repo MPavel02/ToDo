@@ -3,7 +3,7 @@ using ToDo.Application.Models.Note;
 
 namespace ToDo.Application.Notes.Queries.GetNoteByID;
 
-public class GetNoteByIDQuery(Guid ID) : IRequest<NoteDto>
+public class GetNoteByIDQuery : IRequest<NoteDto>
 {
-    public Guid ID { get; set; } = ID;
+    public Guid ID { get; set; }
 }

@@ -1,19 +1,19 @@
-﻿using Mapster;
-using MediatR;
+﻿using MediatR;
+using ToDo.Application.Mappers;
 using ToDo.Application.Models.User;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Queries.GetAllUsers;
 
-public class GetUserListQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserListQuery, UserListModel>
+public class GetUserListQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserListQuery, UserListDto>
 {
-    public async Task<UserListModel> Handle(GetUserListQuery request, CancellationToken cancellationToken)
+    public async Task<UserListDto> Handle(GetUserListQuery request, CancellationToken cancellationToken)
     {
         var users = await userRepository.GetAllAsync(cancellationToken);
 
-        return new UserListModel
+        return new UserListDto
         {
-            Users = users.Select(user => user.Adapt<UserLookupDto>()).ToList(),
+            Users = users.Select(user => user.MapToLookup()).ToList(),
         };
     }
 }

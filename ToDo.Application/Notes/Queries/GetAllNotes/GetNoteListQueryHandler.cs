@@ -1,20 +1,19 @@
-﻿using Mapster;
-using MediatR;
-using ToDo.Application.Models;
+﻿using MediatR;
+using ToDo.Application.Mappers;
 using ToDo.Application.Models.Note;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Queries.GetAllNotes;
 
-public class GetNoteListQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteListQuery, NoteListModel>
+public class GetNoteListQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteListQuery, NoteListDto>
 {
-    public async Task<NoteListModel> Handle(GetNoteListQuery request, CancellationToken cancellationToken)
+    public async Task<NoteListDto> Handle(GetNoteListQuery request, CancellationToken cancellationToken)
     {
         var notes = await noteRepository.GetAllByIDAsync(request.UserID, cancellationToken);
         
-        return new NoteListModel
+        return new NoteListDto
         {
-            Notes = notes.Select(note => note.Adapt<NoteLookupDto>()).ToList(),
+            Notes = notes.Select(note => note.MapToLookup()).ToList()
         };
     }
 }

@@ -2,6 +2,7 @@
 using ToDo.Domain.Entities;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
+using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Application.Users.Commands.UpdateUser;
 
@@ -16,8 +17,12 @@ public class UpdateUserCommandHandler(IUserRepository userRepository) : IRequest
             throw new NotFoundException(nameof(User), request.ID);
         }
         
-        user.Name = request.Name;
-        user.UpdatedAt = DateTime.UtcNow;
+        user.ChangeName(Username.From(request.Name));
+
+        foreach (var note in request.Notes)
+        {
+            user.UpdateNote(note.ID, note.Title, note.Details);
+        }
         
         await userRepository.UpdateAsync(user, cancellationToken);
         

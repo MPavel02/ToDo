@@ -15,16 +15,8 @@ public class UpdateNoteCommandHandler(INoteRepository noteRepository) : IRequest
         {
             throw new NotFoundException(nameof(Note), request.ID);
         }
-
-        if (!string.IsNullOrWhiteSpace(request.Title))
-        {
-            note.Title = request.Title;
-        }
-
-        if (request.Details is not null)
-        {
-            note.Details = request.Details;
-        }
+        
+        note.Update(request.Title, request.Details);
 
         await noteRepository.UpdateAsync(note, cancellationToken);
 

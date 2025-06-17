@@ -28,7 +28,10 @@ public class NoteController(IMediator mediator) : ApiBaseController
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetByID(Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await mediator.Send(new GetNoteByIDQuery(id), cancellationToken);
+        var result = await mediator.Send(new GetNoteByIDQuery
+        {
+            ID = id
+        }, cancellationToken);
         
         return Ok(result);
     }
