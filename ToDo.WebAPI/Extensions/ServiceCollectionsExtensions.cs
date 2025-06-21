@@ -2,7 +2,6 @@
 using Microsoft.OpenApi.Models;
 using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
-using ToDo.DAL.Settings;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.WebAPI.Extensions;
@@ -45,18 +44,11 @@ public static class ServiceCollectionsExtensions
 
         return builder;
     }
-
-    public static WebApplicationBuilder ConfigureOptions(this WebApplicationBuilder builder)
-    {
-        builder.Services.Configure<DatabaseConnectionSettings>(
-            builder.Configuration.GetSection(nameof(DatabaseConnectionSettings)));
-        
-        return builder;
-    }
     
     public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<IToDoDbContextFactory, ToDoDbContextFactory>();
+        builder.Services.AddDbContext<ToDoDbContext>(opt =>
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("ToDoConnection")));
 
         return builder;
     }
