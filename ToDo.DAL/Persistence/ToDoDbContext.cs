@@ -10,7 +10,7 @@ public sealed class ToDoDbContext : DbContext
 
     public ToDoDbContext(DbContextOptions<ToDoDbContext> options) : base(options)
     {
-        if (Database.GetPendingMigrations().Any())
+        if (Database.IsNpgsql() && Database.GetPendingMigrations().Any())
         {
             Database.Migrate();
         }

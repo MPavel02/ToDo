@@ -2,17 +2,13 @@
 using Microsoft.OpenApi.Models;
 using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
+using ToDo.DAL.Settings;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.WebAPI.Extensions;
 
 public static class ServiceCollectionsExtensions
 {
-    /// <summary>
-    /// Параметр в файле настроек, отвечающий за строку подключения к базе данных.
-    /// </summary>
-    private const string SettingsDatabaseParam = "ToDo";
-    
     public static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
     {
         builder.Services.AddSwaggerGen(option =>
@@ -49,11 +45,18 @@ public static class ServiceCollectionsExtensions
 
         return builder;
     }
-    
-    public static WebApplicationBuilder AddData(this WebApplicationBuilder builder)
+
+    public static WebApplicationBuilder ConfigureOptions(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<ToDoDbContext>(opt =>
-            opt.UseNpgsql(builder.Configuration.GetConnectionString(SettingsDatabaseParam)));
+        builder.Services.Configure<DatabaseConnectionSettings>(
+            builder.Configuration.GetSection(nameof(DatabaseConnectionSettings)));
+        
+        return builder;
+    }
+    
+    public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddSingleton<IToDoDbContextFactory, ToDoDbContextFactory>();
 
         return builder;
     }

@@ -1,4 +1,5 @@
-﻿using ToDo.Domain.ValueObjects;
+﻿using ToDo.Domain.Exceptions;
+using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Domain.Entities;
 
@@ -47,7 +48,7 @@ public class User : BaseEntity
     {
         _notes.Add(new Note(Guid.NewGuid(), ID, title, details, DateTime.UtcNow));
     }
-
+    
     /// <summary>
     /// Обновляет заметку.
     /// </summary>
@@ -59,8 +60,8 @@ public class User : BaseEntity
         var note = _notes.FirstOrDefault(note => note.ID == noteID);
 
         if (note is null)
-            return;
-        
+            throw new NotFoundException(nameof(Note), noteID);
+
         note.Update(title, details);
         SetUpdatedAt(DateTime.UtcNow);
     }

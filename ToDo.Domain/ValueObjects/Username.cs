@@ -38,6 +38,7 @@ public class Username : ValueObject
         return value.Length > MaxLength;
     }
     
+    
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

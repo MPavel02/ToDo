@@ -7,7 +7,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder
     .AddSwagger()
-    .AddData()
+    .ConfigureOptions()
+    .AddDataAccess()
     .AddMediatr()
     .AddApplicationServices();
 

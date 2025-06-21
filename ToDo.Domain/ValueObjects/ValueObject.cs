@@ -1,4 +1,6 @@
-﻿namespace ToDo.Domain.ValueObjects;
+﻿using System.Collections;
+
+namespace ToDo.Domain.ValueObjects;
 
 public abstract class ValueObject
 {
@@ -18,16 +20,55 @@ public abstract class ValueObject
     {
         return GetEqualityComponents()
             .Aggregate(1, (current, obj) =>
-                current * 23 + (obj?.GetHashCode() ?? 0));
+            {
+                unchecked
+                {
+                    return current * 397 + ComputeHashCode(obj);
+                }
+            });
     }
 
-    public static bool operator ==(ValueObject left, ValueObject right)
+    public static bool operator ==(ValueObject? left, ValueObject? right)
     {
-        return Equals(left, right);
+        if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
+        {
+            return true;
+        }
+
+        if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+        {
+            return false;
+        }
+
+        return left.Equals(right);
     }
 
-    public static bool operator !=(ValueObject left, ValueObject right)
+    public static bool operator !=(ValueObject? left, ValueObject? right)
     {
         return !(left == right);
+    }
+    
+    private static int ComputeHashCode(object? obj)
+    {
+        unchecked
+        {
+            if (obj == null)
+            {
+                return 0;
+            }
+
+            if (obj is IEnumerable enumerable)
+            {
+                var hash = 19;
+                foreach (var value in enumerable)
+                {
+                    hash *= 31 + value?.GetHashCode() ?? 0;
+                }
+
+                return hash;
+            }
+
+            return obj.GetHashCode();
+        }
     }
 }
