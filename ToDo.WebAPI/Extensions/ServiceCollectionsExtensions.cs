@@ -49,6 +49,9 @@ public static class ServiceCollectionsExtensions
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
             opt.UseNpgsql(builder.Configuration.GetConnectionString("ToDoConnection")));
+        
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<INoteRepository, NoteRepository>();
 
         return builder;
     }
@@ -64,9 +67,6 @@ public static class ServiceCollectionsExtensions
     
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<INoteRepository, NoteRepository>();
-
         return builder;
     }
 }
