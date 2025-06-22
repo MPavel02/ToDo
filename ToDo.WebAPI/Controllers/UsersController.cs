@@ -12,18 +12,6 @@ namespace ToDo.WebAPI.Controllers;
 [Route("api/v1/[controller]")]
 public class UsersController(IMediator mediator) : ApiBaseController
 {
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto request, CancellationToken cancellationToken = default)
-    {
-        var result = await mediator.Send(new CreateUserCommand
-        {
-            Name = request.Name,
-            Notes = request.Notes
-        }, cancellationToken);
-        
-        return Ok(result);
-    }
-    
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetByID(Guid id, CancellationToken cancellationToken = default)
     {
@@ -46,7 +34,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
         await mediator.Send(new UpdateUserCommand
         {
             ID = request.ID,
-            Name = request.Name,
+            Username = request.Username,
             Notes = request.Notes
         }, cancellationToken);
         

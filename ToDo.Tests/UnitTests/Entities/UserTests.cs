@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Enums;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.ValueObjects;
 using ToDo.Tests.Shared.Note;
@@ -16,7 +17,7 @@ public class UserTests
     {
         var userID = new Guid("a5f88c47-7395-4150-bc55-d85c16812ba4");
         
-        _user = new User(userID, Username.From(StandardUserName), DateTime.UtcNow);
+        _user = new User(userID, Username.From(StandardUserName), string.Empty, RoleTypes.User, DateTime.UtcNow);
     }
     
     [Fact]
@@ -29,7 +30,7 @@ public class UserTests
         _user.ChangeName(newName);
         
         // Assert
-        newName.Value.Should().Be(_user.Name.Value);
+        newName.Value.Should().Be(_user.Username.Value);
         _user.UpdatedAt.Should().NotBeNull();
     }
     

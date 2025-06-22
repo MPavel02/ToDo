@@ -17,7 +17,7 @@ namespace ToDo.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "8.0.17")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -68,6 +68,13 @@ namespace ToDo.DAL.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreatedAt");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("UpdatedAt");
@@ -90,7 +97,7 @@ namespace ToDo.DAL.Migrations
 
             modelBuilder.Entity("ToDo.Domain.Entities.User", b =>
                 {
-                    b.OwnsOne("ToDo.Domain.ValueObjects.Username", "Name", b1 =>
+                    b.OwnsOne("ToDo.Domain.ValueObjects.Username", "Username", b1 =>
                         {
                             b1.Property<Guid>("UserID")
                                 .HasColumnType("uuid");
@@ -99,7 +106,7 @@ namespace ToDo.DAL.Migrations
                                 .IsRequired()
                                 .HasMaxLength(64)
                                 .HasColumnType("character varying(64)")
-                                .HasColumnName("Name");
+                                .HasColumnName("Username");
 
                             b1.HasKey("UserID");
 
@@ -109,7 +116,7 @@ namespace ToDo.DAL.Migrations
                                 .HasForeignKey("UserID");
                         });
 
-                    b.Navigation("Name")
+                    b.Navigation("Username")
                         .IsRequired();
                 });
 

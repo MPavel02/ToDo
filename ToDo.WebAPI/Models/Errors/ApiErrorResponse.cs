@@ -1,6 +1,6 @@
 ﻿using ToDo.WebAPI.Enums;
 
-namespace ToDo.WebAPI.Model;
+namespace ToDo.WebAPI.Models.Errors;
 
 public class ApiErrorResponse
 {

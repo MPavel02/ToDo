@@ -17,7 +17,7 @@ public class UpdateUserCommandHandler(IUserRepository userRepository) : IRequest
             throw new NotFoundException(nameof(User), request.ID);
         }
         
-        user.ChangeName(Username.From(request.Name));
+        user.ChangeName(Username.From(request.Username));
 
         foreach (var note in request.Notes)
         {

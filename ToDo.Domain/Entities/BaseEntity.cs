@@ -1,4 +1,6 @@
-﻿namespace ToDo.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ToDo.Domain.Entities;
 
 public abstract class BaseEntity
 {
@@ -16,6 +18,7 @@ public abstract class BaseEntity
     /// <summary>
     /// Идентификатор сущности.
     /// </summary>
+    [Key]
     public Guid ID { get; }
     
     /// <summary>

@@ -10,7 +10,7 @@ public static class UserMapper
         return new UserDto
         {
             ID = user.ID,
-            Name = user.Name.Value,
+            Username = user.Username.Value,
             CreatedAt = user.CreatedAt,
             UpdatedAt = user.UpdatedAt,
             Notes = user.Notes.Map()
@@ -22,7 +22,7 @@ public static class UserMapper
         return new UserLookupDto
         {
             ID = user.ID,
-            Name = user.Name.Value,
+            Name = user.Username.Value,
             Notes = user.Notes.MapToLookup()
         };
     }

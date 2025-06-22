@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using ToDo.DAL.Repositories;
 using ToDo.Domain.Entities;
+using ToDo.Domain.Enums;
 using ToDo.Domain.ValueObjects;
 using ToDo.Tests.Shared;
 
@@ -13,7 +14,7 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user = new User(Guid.NewGuid(), Username.From("TestName"), DateTime.UtcNow);
+        var user = new User(Guid.NewGuid(), Username.From("TestName"), string.Empty, RoleTypes.User, DateTime.UtcNow);
         user.AddNote("Новая заметка", "Детали заметки");
 
         var userRepository = new UserRepository(context);
@@ -33,8 +34,8 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), DateTime.UtcNow);
-        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), DateTime.UtcNow);
+        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), string.Empty, RoleTypes.User, DateTime.UtcNow);
 
         var userRepository = new UserRepository(context);
         
@@ -53,7 +54,7 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user = new User(Guid.NewGuid(), Username.From("TestName1"), DateTime.UtcNow);
+        var user = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
         var updatedName = Username.From("TestName2");
 
         var userRepository = new UserRepository(context);
@@ -70,7 +71,7 @@ public class UserRepositoryTests
         var getUpdatedUserResult = await userRepository.GetByIDAsync(user.ID);
         
         // Assert
-        getUpdatedUserResult?.Name.Should().Be(updatedName);
+        getUpdatedUserResult?.Username.Should().Be(updatedName);
         getUpdatedUserResult?.UpdatedAt.Should().NotBeNull();
     }
     
@@ -79,8 +80,8 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), DateTime.UtcNow);
-        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), DateTime.UtcNow);
+        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), string.Empty, RoleTypes.User, DateTime.UtcNow);
 
         var userRepository = new UserRepository(context);
         

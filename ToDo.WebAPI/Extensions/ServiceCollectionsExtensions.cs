@@ -1,8 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using FluentValidation;
+using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToDo.Application.Models.Settings;
+using ToDo.Application.Services;
 using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
+using ToDo.Domain.Enums;
 using ToDo.Domain.Repositories;
+using ToDo.Domain.Services;
 
 namespace ToDo.WebAPI.Extensions;
 
@@ -45,6 +55,35 @@ public static class ServiceCollectionsExtensions
         return builder;
     }
     
+    public static WebApplicationBuilder AddBearerAuthentication(this WebApplicationBuilder builder)
+    {
+        builder.Services
+            .AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(builder.Configuration["Authentication:TokenPrivateKey"]!)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+        
+        builder.Services.AddAuthorizationBuilder()
+            .AddPolicy(nameof(RoleTypes.Admin), policy => policy.RequireRole(RoleTypes.Admin.ToString()))
+            .AddPolicy(nameof(RoleTypes.User), policy => policy.RequireRole(RoleTypes.User.ToString()));
+        
+        return builder;
+    }
+    
     public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
@@ -61,12 +100,25 @@ public static class ServiceCollectionsExtensions
         builder.Services
             .AddMediatR(cfg => cfg
                 .RegisterServicesFromAssembly(typeof(Application.AssemblyReference).Assembly));
+        
+        builder.Services.AddValidatorsFromAssemblyContaining<Application.AssemblyReference>();
+        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+        return builder;
+    }
+    
+    public static WebApplicationBuilder AddOptions(this WebApplicationBuilder builder)
+    {
+        builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Authentication"));
 
         return builder;
     }
     
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
+        builder.Services.AddScoped<ITokenService, JwtTokenService>();
+        
         return builder;
     }
 }

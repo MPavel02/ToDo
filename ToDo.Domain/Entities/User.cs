@@ -1,4 +1,5 @@
-﻿using ToDo.Domain.Exceptions;
+﻿using ToDo.Domain.Enums;
+using ToDo.Domain.Exceptions;
 using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Domain.Entities;
@@ -11,18 +12,32 @@ public class User : BaseEntity
     
     public User(
         Guid ID,
-        Username name,
+        Username username,
+        string passwordHash,
+        RoleTypes role,
         DateTime createdAt,
         DateTime? updatedAt = null)
         : base(ID, createdAt, updatedAt)
     {
-        Name = name;
+        Username = username;
+        PasswordHash = passwordHash;
+        Role = role;
     }
+    
+    /// <summary>
+    /// Хэш пароля пользователя.
+    /// </summary>
+    public string PasswordHash { get; private set; }
+    
+    /// <summary>
+    /// Роль пользователя.
+    /// </summary>
+    public RoleTypes Role { get; private set; }
     
     /// <summary>
     /// Имя пользователя.
     /// </summary>
-    public Username Name { get; private set; }
+    public Username Username { get; private set; }
     
     /// <summary>
     /// Заметки пользователя.
@@ -35,7 +50,7 @@ public class User : BaseEntity
     /// <param name="name">Новое имя пользователя.</param>
     public void ChangeName(Username name)
     {
-        Name = name;
+        Username = name;
         SetUpdatedAt(DateTime.UtcNow);
     }
 

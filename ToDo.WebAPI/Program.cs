@@ -6,6 +6,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder
+    .AddBearerAuthentication()
+    .AddOptions()
     .AddSwagger()
     .AddDataAccess()
     .AddMediatr()

@@ -14,6 +14,13 @@ public class UserRepository(ToDoDbContext context) : IUserRepository
             .FirstOrDefaultAsync(user => user.ID == ID, cancellationToken);
     }
 
+    public async Task<User?> GetByNameAsync(string username, CancellationToken cancellationToken = default)
+    {
+        return await context.Users
+            .Include(user => user.Notes)
+            .FirstOrDefaultAsync(user => user.Username.Value == username, cancellationToken);
+    }
+
     public async Task<IList<User>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await context.Users

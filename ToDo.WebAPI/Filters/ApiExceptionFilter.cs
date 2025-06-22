@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Extensions;
 using ToDo.WebAPI.Enums;
-using ToDo.WebAPI.Model;
+using ToDo.WebAPI.Models.Errors;
 
 namespace ToDo.WebAPI.Filters;
 

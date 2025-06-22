@@ -4,6 +4,5 @@ namespace ToDo.WebAPI.Models.User;
 
 public class CreateUserDto
 {
-    public required string Name { get; set; }
-    public ICollection<CreateNoteModel> Notes { get; set; }
+    public required string Username { get; set; }
 }
