@@ -19,6 +19,7 @@ public class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
         {
             new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
             new Claim(ClaimTypes.Name, user.Username.Value),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.TokenPrivateKey));
@@ -29,8 +30,7 @@ public class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
             audience: _settings.Audience,
             claims: claims,
             expires: DateTime.Now.AddMinutes(_settings.ExpiryMinutes),
-            signingCredentials: credentials
-        );
+            signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

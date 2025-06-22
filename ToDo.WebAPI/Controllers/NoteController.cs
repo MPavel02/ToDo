@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Application.Notes.Commands.CreateNote;
 using ToDo.Application.Notes.Commands.DeleteNote;
@@ -9,7 +10,7 @@ using ToDo.WebAPI.Models.Note;
 
 namespace ToDo.WebAPI.Controllers;
 
-[Route("api/v1/[controller]")]
+[Authorize]
 public class NoteController(IMediator mediator) : ApiBaseController
 {
     [HttpPost]

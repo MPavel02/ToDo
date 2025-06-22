@@ -69,11 +69,15 @@ public static class ServiceCollectionsExtensions
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    
+                    ValidIssuer = builder.Configuration["Authentication:Issuer"],
+                    ValidAudience = builder.Configuration["Authentication:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.ASCII.GetBytes(builder.Configuration["Authentication:TokenPrivateKey"]!)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                        Encoding.UTF8.GetBytes(builder.Configuration["Authentication:TokenPrivateKey"]!))
                 };
             });
         

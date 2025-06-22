@@ -11,6 +11,7 @@ public static class UserMapper
         {
             ID = user.ID,
             Username = user.Username.Value,
+            Role = user.Role,
             CreatedAt = user.CreatedAt,
             UpdatedAt = user.UpdatedAt,
             Notes = user.Notes.Map()

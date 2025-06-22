@@ -5,4 +5,5 @@ namespace ToDo.WebAPI.Controllers;
 
 [ApiController]
 [TypeFilter<ApiExceptionFilter>]
+[Route("api/v1/[controller]")]
 public class ApiBaseController : ControllerBase;

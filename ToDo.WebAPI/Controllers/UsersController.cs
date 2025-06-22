@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Users.Commands.CreateUser;
 using ToDo.Application.Users.Commands.DeleteUser;
 using ToDo.Application.Users.Commands.UpdateUser;
 using ToDo.Application.Users.Queries.GetAllUsers;
@@ -9,7 +9,7 @@ using ToDo.WebAPI.Models.User;
 
 namespace ToDo.WebAPI.Controllers;
 
-[Route("api/v1/[controller]")]
+[Authorize]
 public class UsersController(IMediator mediator) : ApiBaseController
 {
     [HttpGet("{id:guid}")]
@@ -29,6 +29,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     }
     
     [HttpPut]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update([FromBody] UpdateUserDto request, CancellationToken cancellationToken = default)
     {
         await mediator.Send(new UpdateUserCommand
@@ -42,6 +43,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     }
     
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
         await mediator.Send(new DeleteUserCommand(id), cancellationToken);
