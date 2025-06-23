@@ -23,7 +23,7 @@ public static class UserMapper
         return new UserLookupDto
         {
             ID = user.ID,
-            Name = user.Username.Value,
+            Username = user.Username.Value,
             Notes = user.Notes.MapToLookup()
         };
     }

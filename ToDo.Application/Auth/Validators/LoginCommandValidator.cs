@@ -2,7 +2,7 @@
 using ToDo.Application.Auth.Commands.LoginCommand;
 using ToDo.Application.Constants;
 
-namespace ToDo.Application.Validators.Auth;
+namespace ToDo.Application.Auth.Validators;
 
 public class LoginCommandValidator : AbstractValidator<LoginCommand>
 {

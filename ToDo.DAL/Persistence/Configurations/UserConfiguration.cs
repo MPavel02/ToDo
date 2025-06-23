@@ -22,11 +22,18 @@ internal class UserConfiguration : BaseEntityConfiguration<User>
             .HasForeignKey(note => note.UserID)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.OwnsOne(user => user.Username, nameBuilder => nameBuilder
-            .Property(name => name.Value)
+        builder.OwnsOne(user => user.Username, nameBuilder =>
+        {
+            nameBuilder
+                .Property(name => name.Value)
                 .HasColumnName(nameof(User.Username))
                 .HasMaxLength(Username.MaxLength)
-                .IsRequired());
+                .IsRequired();
+            
+            nameBuilder
+                .HasIndex(name => name.Value)
+                .IsUnique();
+        });
 
         builder.Property(user => user.PasswordHash)
             .IsRequired();
