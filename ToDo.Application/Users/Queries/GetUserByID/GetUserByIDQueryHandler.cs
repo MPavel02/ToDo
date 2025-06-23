@@ -14,9 +14,7 @@ public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestH
         var user = await userRepository.GetByIDAsync(request.ID, cancellationToken);
 
         if (user is null)
-        {
             throw new NotFoundException(nameof(User), request.ID);
-        }
 
         return user.Map();
     }

@@ -24,8 +24,7 @@ internal class UserConfiguration : BaseEntityConfiguration<User>
 
         builder.OwnsOne(user => user.Username, nameBuilder =>
         {
-            nameBuilder
-                .Property(name => name.Value)
+            nameBuilder.Property(name => name.Value)
                 .HasColumnName(nameof(User.Username))
                 .HasMaxLength(Username.MaxLength)
                 .IsRequired();

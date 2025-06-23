@@ -30,6 +30,26 @@ public class UserRepositoryTests
     }
     
     [Fact]
+    public async Task GetByNameAsync_ExistingUser_ReturnsUser()
+    {
+        // Arrange
+        var username = Username.From("TestName");
+        
+        await using var context = TestHelper.CreateContext();
+        var user1 = new User(Guid.NewGuid(), username, string.Empty, RoleTypes.User, DateTime.UtcNow);
+
+        var userRepository = new UserRepository(context);
+        
+        // Act
+        await userRepository.AddAsync(user1);
+        
+        var getUsersResult = await userRepository.GetByNameAsync(username);
+        
+        // Assert
+        getUsersResult.Should().NotBeNull();
+    }
+    
+    [Fact]
     public async Task GetAllAsync_ExistingUsers_ReturnsUsers()
     {
         // Arrange

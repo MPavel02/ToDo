@@ -2,6 +2,7 @@
 using ToDo.DAL.Persistence;
 using ToDo.Domain.Entities;
 using ToDo.Domain.Repositories;
+using ToDo.Domain.ValueObjects;
 
 namespace ToDo.DAL.Repositories;
 
@@ -14,11 +15,11 @@ public class UserRepository(ToDoDbContext context) : IUserRepository
             .FirstOrDefaultAsync(user => user.ID == ID, cancellationToken);
     }
 
-    public async Task<User?> GetByNameAsync(string username, CancellationToken cancellationToken = default)
+    public async Task<User?> GetByNameAsync(Username username, CancellationToken cancellationToken = default)
     {
         return await context.Users
             .Include(user => user.Notes)
-            .FirstOrDefaultAsync(user => user.Username.Value == username, cancellationToken);
+            .FirstOrDefaultAsync(user => user.Username.Value == username.Value, cancellationToken);
     }
 
     public async Task<IList<User>> GetAllAsync(CancellationToken cancellationToken = default)

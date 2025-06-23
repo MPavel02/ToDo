@@ -17,14 +17,16 @@ public class RegisterCommandHandler(
 {
     public async Task<AuthResult> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByNameAsync(request.Username, cancellationToken);
+        var username = Username.From(request.Username);
+        
+        var user = await userRepository.GetByNameAsync(username, cancellationToken);
 
         if (user is not null)
             throw new DuplicateEntityException<Guid>(nameof(User), user.ID);
         
         var newUser = new User(
             Guid.NewGuid(),
-            Username.From(request.Username),
+            username,
             passwordHasher.Hash(request.Password),
             RoleTypes.User,
             DateTime.UtcNow);
