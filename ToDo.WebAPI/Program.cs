@@ -11,7 +11,8 @@ builder
     .AddSwagger()
     .AddDataAccess()
     .AddMediatr()
-    .AddApplicationServices();
+    .AddApplicationServices()
+    .AddBackgroundServices();
 
 var app = builder.Build();
 

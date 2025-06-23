@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ToDo.DAL.ClickHouse.Logs\ToDo.DAL.ClickHouse.Logs.csproj" />
       <ProjectReference Include="..\ToDo.DAL\ToDo.DAL.csproj" />
       <ProjectReference Include="..\ToDo.Domain\ToDo.Domain.csproj" />
     </ItemGroup>

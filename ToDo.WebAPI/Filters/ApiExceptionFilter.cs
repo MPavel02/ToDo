@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Extensions;
+using ToDo.Domain.Services;
 using ToDo.WebAPI.Models.Errors;
+using LogLevel = ToDo.Domain.Enums.LogLevel;
 
 namespace ToDo.WebAPI.Filters;
 
-public class ApiExceptionFilter : IExceptionFilter
+public class ApiExceptionFilter(ILoggerService loggerService) : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
@@ -17,6 +19,8 @@ public class ApiExceptionFilter : IExceptionFilter
             Message = exception.Message,
             Description = exception.ToText()
         };
+        
+        loggerService.LogAsync(LogLevel.Exception, exception.Message, exception);
 
         context.Result = new JsonResult(new { response })
         {

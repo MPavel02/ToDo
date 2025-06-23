@@ -1,6 +1,6 @@
 ﻿namespace ToDo.Domain.Entities;
 
-public class Note : BaseEntity
+public class Note : BaseEntityWithDates
 {
     protected Note() {}
     
@@ -9,9 +9,8 @@ public class Note : BaseEntity
         Guid userID,
         string title,
         string details,
-        DateTime createdAt,
-        DateTime? updatedAt = null)
-        : base(ID, createdAt, updatedAt)
+        DateTime createdAt)
+        : base(ID, createdAt)
     {
         if (string.IsNullOrWhiteSpace(title))
         {

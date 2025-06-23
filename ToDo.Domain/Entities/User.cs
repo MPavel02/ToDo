@@ -4,7 +4,7 @@ using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Domain.Entities;
 
-public class User : BaseEntity
+public class User : BaseEntityWithDates
 {
     private readonly List<Note> _notes = [];
     
@@ -15,9 +15,8 @@ public class User : BaseEntity
         Username username,
         string passwordHash,
         RoleTypes role,
-        DateTime createdAt,
-        DateTime? updatedAt = null)
-        : base(ID, createdAt, updatedAt)
+        DateTime createdAt)
+        : base(ID, createdAt)
     {
         Username = username;
         PasswordHash = passwordHash;

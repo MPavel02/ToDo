@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ClickHouse.EntityFrameworkCore.Extensions;
 using FluentValidation;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
@@ -6,10 +7,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToDo.Application.BackgroundServices;
 using ToDo.Application.Models.Settings;
 using ToDo.Application.Services;
+using ToDo.DAL.ClickHouse.Logs.Persistence;
+using ToDo.DAL.ClickHouse.Logs.Repositories;
 using ToDo.DAL.Persistence;
 using ToDo.DAL.Repositories;
+using ToDo.Domain.BackgroundServices;
 using ToDo.Domain.Enums;
 using ToDo.Domain.Repositories;
 using ToDo.Domain.Services;
@@ -88,13 +93,24 @@ public static class ServiceCollectionsExtensions
         return builder;
     }
     
+    public static WebApplicationBuilder AddOptions(this WebApplicationBuilder builder)
+    {
+        builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Authentication"));
+
+        return builder;
+    }
+    
     public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
             opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresToDoConnection")));
         
+        builder.Services.AddDbContext<LogsDbContext>(opt =>
+            opt.UseClickHouse(builder.Configuration.GetConnectionString("ClickHouseToDoLogsConnection")));
+        
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<INoteRepository, NoteRepository>();
+        builder.Services.AddScoped<ILogRepository, LogRepository>();
 
         return builder;
     }
@@ -111,18 +127,20 @@ public static class ServiceCollectionsExtensions
         return builder;
     }
     
-    public static WebApplicationBuilder AddOptions(this WebApplicationBuilder builder)
-    {
-        builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Authentication"));
-
-        return builder;
-    }
-    
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
         builder.Services.AddScoped<ITokenService, JwtTokenService>();
+        builder.Services.AddScoped<ILoggerService, LoggerService>();
         
+        return builder;
+    }
+    
+    public static WebApplicationBuilder AddBackgroundServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddSingleton<ILogQueue, LogQueue>();
+        builder.Services.AddHostedService<LoggerBackgroundService>();
+            
         return builder;
     }
 }
