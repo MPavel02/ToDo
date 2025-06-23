@@ -91,7 +91,7 @@ public static class ServiceCollectionsExtensions
     public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
     {
         builder.Services.AddDbContext<ToDoDbContext>(opt =>
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("ToDoConnection")));
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresToDoConnection")));
         
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<INoteRepository, NoteRepository>();

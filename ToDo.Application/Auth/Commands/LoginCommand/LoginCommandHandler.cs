@@ -19,6 +19,11 @@ public class LoginCommandHandler(
         
         var token = tokenService.GenerateToken(user);
 
-        return new AuthResult { Success = true, Token = token, UserID = user.ID };
+        return new AuthResult
+        {
+            Success = true,
+            Token = token,
+            UserID = user.ID
+        };
     }
 }
