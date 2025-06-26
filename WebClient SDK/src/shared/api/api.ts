@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useAuth} from "shared/lib/hooks/useAuth/useAuth";
+import { getToken } from 'shared/api/token';
 
 export const $api = axios.create({
     baseURL: __API__,
@@ -7,7 +7,7 @@ export const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    const { token } = useAuth();
+    const token = getToken();
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }

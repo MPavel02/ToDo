@@ -11,7 +11,7 @@ using ToDo.WebAPI.Models.Note;
 namespace ToDo.WebAPI.Controllers;
 
 [Authorize]
-public class NoteController(IMediator mediator) : ApiBaseController
+public class NotesController(IMediator mediator) : ApiBaseController
 {
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateNoteDto request, CancellationToken cancellationToken = default)

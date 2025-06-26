@@ -143,4 +143,18 @@ public static class ServiceCollectionsExtensions
             
         return builder;
     }
+    
+    public static WebApplicationBuilder AddCors(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowLocalhost", policyBuilder =>
+            {
+                policyBuilder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
+        });
+            
+        return builder;
+    }
 }

@@ -5,17 +5,14 @@ import { MutableRefObject, ReactNode, useRef } from 'react';
 interface PageProps {
     className?: string;
     children: ReactNode;
-    onScrollEnd?: () => void;
 }
 
 export const Page = (props: PageProps) => {
     const {
         className,
-        children,
-        onScrollEnd
+        children
     } = props;
     const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
-    const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
     return (
         <section
@@ -23,7 +20,6 @@ export const Page = (props: PageProps) => {
             className={classNames(cls.Page, {}, [className])}
         >
             {children}
-            {onScrollEnd ? <div className={cls.trigger} ref={triggerRef}/> : null}
         </section>
     );
 };

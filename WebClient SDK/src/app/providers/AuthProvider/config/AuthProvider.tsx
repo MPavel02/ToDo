@@ -1,6 +1,5 @@
-import React, {createContext, ReactNode, useState} from "react";
-
-const token_key: string = 'auth_token';
+import React, { createContext, ReactNode, useState } from 'react';
+import { AuthToken } from 'shared/const/api';
 
 interface AuthState {
     token: string | null;
@@ -22,12 +21,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [token, setToken] = useState<string | null>(localStorage.getItem('auth_token'));
 
     const login = (newToken: string) => {
-        localStorage.setItem(token_key, newToken);
+        localStorage.setItem(AuthToken, newToken);
         setToken(newToken);
     };
 
     const logout = () => {
-        localStorage.removeItem(token_key);
+        localStorage.removeItem(AuthToken);
         setToken(null);
     };
 

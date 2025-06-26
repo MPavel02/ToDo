@@ -1,10 +1,11 @@
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { ScrollRestorationSchema } from 'widgets/Page';
-import {LoginSchema} from "features/Authorization";
+import { LoginSchema } from 'features/Authorization';
+import { UserSchema } from 'entities/User';
 
 export interface StateSchema {
-    // authorization: AuthorizationSchema;
+    user: UserSchema;
     scrollRestoration: ScrollRestorationSchema;
 
     // Асинхронные редюсеры

@@ -2,8 +2,8 @@ import cls from './Sidebar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {NavItem} from "shared/ui/NavItem/ui/NavItem";
-import {RoutePath} from "shared/config/routeConfig/routeConfig";
+import { NavItem } from 'shared/ui/NavItem/ui/NavItem';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 
 interface SidebarProps {
     className?: string;

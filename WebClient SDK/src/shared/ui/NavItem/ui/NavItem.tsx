@@ -1,7 +1,7 @@
-import {classNames} from "shared/lib/classNames/classNames";
-import {useLocation} from "react-router-dom";
-import {Button} from "shared/ui/Button/Button";
-import React, {memo} from "react";
+import { classNames } from 'shared/lib/classNames/classNames';
+import { useLocation } from 'react-router-dom';
+import { Button } from 'shared/ui/Button/Button';
+import React, { memo } from 'react';
 
 interface NavItemProps {
     className?: string;

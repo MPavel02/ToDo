@@ -1,5 +1,5 @@
-import { NotesPageAsync } from "./ui/NotesPage.async";
+import { NotesPageAsync } from './ui/NotesPage.async';
 
 export {
     NotesPageAsync as NotesPage
-}
+};
