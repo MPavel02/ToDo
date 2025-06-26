@@ -27,7 +27,7 @@ const LoginForm = ({ className, onSuccess }: LoginFormProps) => {
     const { t } = useTranslation('loginForm');
     const dispatch = useAppDispatch();
 
-    const { login } = useAuth();
+    const { login, logout } = useAuth();
 
     const username = useSelector(getLoginUsername);
     const password = useSelector(getLoginPassword);
@@ -51,8 +51,13 @@ const LoginForm = ({ className, onSuccess }: LoginFormProps) => {
     }, [dispatch, onSuccess, password, username]);
 
     useEffect(() => {
+        if (!token) {
+            logout();
+            return;
+        }
+
         login(token);
-    }, [login, token]);
+    }, [login, logout, token]);
 
     return (
         <DynamicModuleLoader
