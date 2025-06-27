@@ -31,19 +31,18 @@ export const Header = ({ className }: HeaderProps) => {
 
     return (
         <header className={classNames(cls.Header, {}, [className])}>
-            <div className={cls.header__container}>
-                <Button
-                    as={'button'}
-                    theme={ButtonTheme.AUTH}
-                    onClick={onAuthClick}
-                >
-                    {isAuthenticated ? t('Logout') : t('Authorize')}
-                </Button>
-                <LoginModal
-                    isOpen={isAuthModal}
-                    onClose={onCloseModal}
-                />
-            </div>
+            <Button
+                className={cls.auth__btn}
+                as={'button'}
+                theme={ButtonTheme.AUTH}
+                onClick={onAuthClick}
+            >
+                {isAuthenticated ? t('Logout') : t('Login')}
+            </Button>
+            <LoginModal
+                isOpen={isAuthModal}
+                onClose={onCloseModal}
+            />
         </header>
     );
 };

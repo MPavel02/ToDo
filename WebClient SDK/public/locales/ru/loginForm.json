@@ -1,6 +1,8 @@
 {
   "FormAuthorization": "Форма авторизации",
-  "NotValidAuthData": "Данные некорректны",
+  "LoginError": "Ошибка сервера",
+  "UsernameEmptyError": "Заполните имя пользователя!",
+  "PasswordEmptyError": "Заполните пароль!",
   "LoginPlaceholder": "Введите логин",
   "PasswordPlaceholder": "Введите пароль",
   "LoginFormEnterBtn": "Войти"

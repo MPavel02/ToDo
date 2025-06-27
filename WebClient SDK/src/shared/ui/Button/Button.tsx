@@ -2,6 +2,7 @@ import { classNames, Mods } from 'shared/lib/classNames/classNames';
 import cls from './Button.module.scss';
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 
 export enum ButtonTheme {
     CLEAR = 'clear',
@@ -19,6 +20,7 @@ type BaseProps = {
     children?: ReactNode;
     theme?: ButtonTheme;
     disabled?: boolean;
+    loading?: boolean;
 };
 
 type ButtonAsButton = BaseProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
@@ -42,11 +44,13 @@ export const Button = memo((props: ButtonProps) => {
             theme = ButtonTheme.CLEAR,
             disabled,
             size = ButtonSize.M,
+            loading = false,
             ...otherProps
         } = props;
 
         const mods: Mods = {
-            [cls.disabled]: disabled
+            [cls.disabled]: disabled,
+            [cls.loading]: loading
         };
 
         const additional: Array<string | undefined> = [
@@ -62,7 +66,10 @@ export const Button = memo((props: ButtonProps) => {
                 disabled={disabled}
                 {...otherProps}
             >
-                {children}
+                <div className={cls.btnContainer}>
+                    {loading && <Loader2 className={cls.loader} size={16}/>}
+                    {children}
+                </div>
             </button>
         );
     }

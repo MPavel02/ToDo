@@ -1,6 +1,8 @@
 {
   "FormAuthorization": "Authorization form",
-  "NotValidAuthData": "Invalid data",
+  "LoginError": "Server error",
+  "UsernameEmptyError": "Input username!",
+  "PasswordEmptyError": "Input password!",
   "LoginPlaceholder": "Enter login",
   "PasswordPlaceholder": "Enter password",
   "LoginFormEnterBtn": "Enter"

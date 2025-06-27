@@ -4,6 +4,12 @@
     width: 400px;
 }
 
+.formTitle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
 .authInputWrapper {
     display: flex;
     width: 100%;
@@ -17,12 +23,15 @@
 
 .input {
     width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .loginBtn {
+    padding: 6px 12px;
     margin-top: 15px;
     margin-left: auto;
     border-radius: 12px;
     border-color: transparent;
-    background: var(--inverted-bg-color);
+    background: var(--primary-color);
 }

@@ -4,13 +4,9 @@
     background: var(--header-bg-color);
     display: flex;
     align-items: center;
-    border-bottom: #757575 1px solid;
+    justify-content: flex-end;
 
-    .header__container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 1200px;
-        margin: 0 auto;
+    .auth__btn {
+        margin-right: 1.2rem;
     }
 }

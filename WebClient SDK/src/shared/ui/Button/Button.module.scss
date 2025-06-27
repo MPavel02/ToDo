@@ -6,10 +6,24 @@
         fill-opacity: 0.7;
         stroke-opacity: 0.7;
     }
+
+    .btnContainer {
+        display: flex;
+        align-items: center;
+
+        .loader {
+            margin-right: 4px;
+            animation: spin 1s linear infinite
+        }
+    }
 }
 
 .Button.disabled {
     opacity: 0.3;
+}
+
+.Button.loading {
+    opacity: 0.7;
 }
 
 .clear {
@@ -17,6 +31,11 @@
     border: none;
     background: none;
     outline: none;
+    cursor: pointer;
+}
+
+.clear.loading {
+    cursor: default;
 }
 
 .auth {
@@ -102,4 +121,9 @@
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
