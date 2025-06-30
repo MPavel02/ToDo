@@ -14,15 +14,15 @@ public class ApiExceptionFilter(ILoggerService loggerService) : IExceptionFilter
     {
         var exception = context.Exception;
         
+        loggerService.LogAsync(LogLevel.Exception, exception.Message, exception);
+        
         var response = new ApiErrorResponse
         {
             Message = exception.Message,
             Description = exception.ToText()
         };
-        
-        loggerService.LogAsync(LogLevel.Exception, exception.Message, exception);
 
-        context.Result = new JsonResult(new { response })
+        context.Result = new JsonResult(response)
         {
             StatusCode = GetStatusCode(exception)
         };

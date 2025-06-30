@@ -6,7 +6,8 @@ import { Loader2 } from 'lucide-react';
 
 export enum ButtonTheme {
     CLEAR = 'clear',
-    AUTH = 'auth'
+    AUTH = 'auth',
+    SIDEBAR = 'sidebar',
 }
 
 export enum ButtonSize {
@@ -20,12 +21,13 @@ type BaseProps = {
     children?: ReactNode;
     theme?: ButtonTheme;
     disabled?: boolean;
-    loading?: boolean;
+    active?: boolean;
 };
 
 type ButtonAsButton = BaseProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
     as: 'button';
     size?: ButtonSize;
+    loading?: boolean;
 };
 
 type ButtonAsLink = BaseProps & Omit<LinkProps, keyof BaseProps> & {
@@ -80,17 +82,24 @@ export const Button = memo((props: ButtonProps) => {
         children,
         theme = ButtonTheme.CLEAR,
         disabled,
+        active,
         ...otherProps
     } = props;
 
     const mods: Mods = {
-        [cls.disabled]: disabled
+        [cls.disabled]: disabled,
+        [cls.active]: active
     };
+
+    const additional: Array<string | undefined> = [
+        className,
+        cls[theme]
+    ];
 
     return (
         <Link
             to={to}
-            className={classNames(cls.Button, mods, [className, cls[theme]])}
+            className={classNames(cls.Button, mods, additional)}
             {...otherProps}
         >
             {children}

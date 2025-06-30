@@ -1,17 +1,25 @@
 export interface User {
     id: string;
     username: string;
+    role: UserRole;
+    createdAt: Date;
+    updatedAt: Date;
+    notes: [];
+}
+
+export enum UserRole {
+    Admin,
+    User
 }
 
 export interface AuthResult {
-    success: boolean;
     token: string;
-    error?: string;
-    userID: string;
 }
 
 export interface UserSchema {
     authData?: AuthResult;
+    userData?: User;
 
-    _inited: boolean;
+    isLoading: boolean;
+    error?: string;
 }

@@ -1,5 +1,5 @@
 .Button {
-    color: var(--btn-text-color);
+    color: var(--text-color);
 
     &:hover {
         opacity: 0.7;
@@ -52,54 +52,16 @@
     visibility: visible !important;
 }
 
-.logout {
-    padding: 0;
-    border: 1px solid #0000001e;
-    border-radius: 6px;
-    background: #ffffff04;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.green {
-    padding: 0;
-    border: none;
-    background: var(--header-btn-bg-color);
-    outline: none;
-}
-
 .outline {
     border: 1px solid var(--main-color);
     color: var(--main-color);
     background: none;
 }
 
-.background {
-    background: var(--bg-color);
-    color: var(--main-color);
-    border: none;
-}
-
-.background_inverted {
-    background: var(--inverted-bg-color);
-    color: var(--main-color);
-    border: none;
-}
-
-.split_button_main {
-    background: #4d4d4d;
-    color: var(--btn-text-color);
-    border: 1px solid #000;
-    border-radius: 3px;
-}
-
-.split_button_item {
-    background: #4d4d4d;
-    color: var(--btn-text-color);
-    border-radius: 3px;
-    border: none;
+.sidebar {
+    &.active {
+        color: var(--active-color);
+    }
 }
 
 .size_m {

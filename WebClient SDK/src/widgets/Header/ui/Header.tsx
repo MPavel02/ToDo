@@ -5,6 +5,8 @@ import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { LoginModal } from 'features/Authorization';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'shared/lib/hooks/useAuth/useAuth';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { userActions } from 'entities/User';
 
 interface HeaderProps {
     className?: string;
@@ -12,6 +14,8 @@ interface HeaderProps {
 
 export const Header = ({ className }: HeaderProps) => {
     const { t } = useTranslation('header');
+
+    const dispatch = useAppDispatch();
 
     const { isAuthenticated, logout } = useAuth();
 
@@ -25,8 +29,13 @@ export const Header = ({ className }: HeaderProps) => {
         setIsAuthModal(true);
     }, []);
 
+    const onLogOut = useCallback(() => {
+        logout();
+        dispatch(userActions.removeUserData());
+    }, [dispatch, logout]);
+
     const onAuthClick = isAuthenticated
-        ? () => logout()
+        ? onLogOut
         : onShowModal;
 
     return (

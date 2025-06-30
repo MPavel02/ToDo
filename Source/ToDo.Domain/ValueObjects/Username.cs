@@ -43,4 +43,9 @@ public class Username : ValueObject
     {
         yield return Value;
     }
+    
+    public override string ToString()
+    {
+        return Value;
+    }
 }

@@ -35,11 +35,6 @@ public class RegisterCommandHandler(
         
         var token = tokenService.GenerateToken(newUser);
         
-        return new AuthResult
-        {
-            Success = true,
-            Token = token,
-            UserID = newUser.ID
-        };
+        return new AuthResult { Token = token };
     }
 }

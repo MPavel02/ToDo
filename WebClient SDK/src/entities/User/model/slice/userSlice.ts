@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthResult, UserSchema } from '../types/user';
+import { fetchUserData } from '../services/fetchUserData/fetchUserData';
 
 const initialState: UserSchema = {
-    _inited: false
+    isLoading: false,
+    error: undefined
 };
 
 export const userSlice = createSlice({
@@ -12,9 +14,24 @@ export const userSlice = createSlice({
         setAuthData: (state, action: PayloadAction<AuthResult>) => {
             state.authData = action.payload;
         },
-        initAuthData: (state) => {
-            state._inited = true;
-        }
+        removeUserData: (state) => {
+            state.userData = undefined;
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchUserData.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(fetchUserData.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.userData = action.payload;
+            })
+            .addCase(fetchUserData.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            });
     }
 });
 

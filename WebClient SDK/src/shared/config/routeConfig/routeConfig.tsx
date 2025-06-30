@@ -2,6 +2,8 @@ import { RouteProps } from 'react-router-dom';
 import { NotFoundPage } from 'pages/NotFoundPage';
 import { NotesPage } from 'pages/NotesPage';
 import { MainPage } from 'pages/MainPage';
+import { LogsPage } from 'pages/LogsPage';
+import { UsersPage } from 'pages/UsersPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -9,6 +11,8 @@ export type AppRoutesProps = RouteProps & {
 
 export enum AppRoutes {
     MAIN = 'main',
+    LOGS = 'logs',
+    USERS = 'users',
     NOTES = 'notes',
     NOTE_DETAILS = 'note_details',
     NOTE_CREATE = 'note_create',
@@ -21,6 +25,8 @@ export enum AppRoutes {
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
+    [AppRoutes.LOGS]: '/logs',
+    [AppRoutes.USERS]: '/users',
     [AppRoutes.NOTES]: '/notes',
     [AppRoutes.NOTE_DETAILS]: '/notes/',
     [AppRoutes.NOTE_CREATE]: '/notes/create',
@@ -36,6 +42,16 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.main,
         element: <MainPage/>,
         authOnly: false
+    },
+    [AppRoutes.LOGS]: {
+        path: RoutePath.logs,
+        element: <LogsPage/>,
+        authOnly: true
+    },
+    [AppRoutes.USERS]: {
+        path: RoutePath.users,
+        element: <UsersPage/>,
+        authOnly: true
     },
     [AppRoutes.NOTES]: {
         path: RoutePath.notes,

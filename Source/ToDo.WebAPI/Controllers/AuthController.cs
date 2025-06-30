@@ -16,7 +16,7 @@ public class AuthController(IMediator mediator) : ApiBaseController
             Username = request.Username,
             Password = request.Password
         }, cancellationToken);
-        return result.Success ? Ok(result) : BadRequest(result.Error);
+        return Ok(result);
     }
     
     [HttpPost("login")]
@@ -27,6 +27,6 @@ public class AuthController(IMediator mediator) : ApiBaseController
             Username = request.Username,
             Password = request.Password
         }, cancellationToken);
-        return result.Success ? Ok(result) : Unauthorized(result.Error);
+        return Ok(result);
     }
 }

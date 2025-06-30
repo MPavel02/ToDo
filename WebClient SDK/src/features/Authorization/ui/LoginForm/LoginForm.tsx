@@ -12,7 +12,7 @@ import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/Dynamic
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getLoginError, getLoginIsLoading, getLoginPassword, getLoginUsername } from 'features/Authorization';
 import { useAuth } from 'shared/lib/hooks/useAuth/useAuth';
-import { getUserToken } from 'entities/User';
+import { getAuthToken } from 'entities/User';
 
 export interface LoginFormProps {
     className?: string;
@@ -36,7 +36,7 @@ const LoginForm = ({ className, onSuccess }: LoginFormProps) => {
     const password = useSelector(getLoginPassword);
     const isLoading = useSelector(getLoginIsLoading);
     const error = useSelector(getLoginError);
-    const token = useSelector(getUserToken);
+    const token = useSelector(getAuthToken);
 
     const onChangeUsername = useCallback((value: string) => {
         setIsUsernameEmpty(!value);

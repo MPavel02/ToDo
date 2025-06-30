@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using ToDo.Application.Models.Auth;
+using ToDo.Domain.Entities;
+using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
 using ToDo.Domain.Services;
 using ToDo.Domain.ValueObjects;
@@ -15,16 +17,14 @@ public class LoginCommandHandler(
     {
         var user = await userRepository.GetByNameAsync(Username.From(request.Username), cancellationToken);
 
-        if (user is null || !passwordHasher.Verify(request.Password, user.PasswordHash))
-            return new AuthResult { Success = false, Error = "Неверный логин или пароль." };
+        if (user is null)
+            throw new NotFoundException(nameof(User), request.Username);
+
+        if (!passwordHasher.Verify(request.Password, user.PasswordHash))
+            throw new IncorrectFieldException("Неверный пароль", nameof(request.Password));
         
         var token = tokenService.GenerateToken(user);
 
-        return new AuthResult
-        {
-            Success = true,
-            Token = token,
-            UserID = user.ID
-        };
+        return new AuthResult { Token = token };
     }
 }
