@@ -1,3 +1,5 @@
+import { ApiError } from 'shared/api/apiError';
+
 export interface User {
     id: string;
     username: string;
@@ -21,5 +23,5 @@ export interface UserSchema {
     userData?: User;
 
     isLoading: boolean;
-    error?: string;
+    error?: ApiError;
 }

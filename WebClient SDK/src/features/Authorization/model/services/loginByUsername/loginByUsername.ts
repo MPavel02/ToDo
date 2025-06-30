@@ -3,6 +3,7 @@ import { ThunkConfig } from 'app/providers/StoreProvider';
 import { AuthResult } from 'entities/User/model/types/user';
 import { userActions } from 'entities/User';
 import { API_ENDPOINT_V1 } from 'shared/const/api';
+import { ApiError, handleAxiosError } from 'shared/api/apiError';
 
 interface LoginProps {
     username: string;
@@ -10,7 +11,7 @@ interface LoginProps {
 }
 
 export const loginByUsername
-    = createAsyncThunk<AuthResult, LoginProps, ThunkConfig<string>>(
+    = createAsyncThunk<AuthResult, LoginProps, ThunkConfig<ApiError>>(
         'loginByUsername/loginByUsername',
         async (authData, thunkAPI) => {
             const {
@@ -31,9 +32,8 @@ export const loginByUsername
                 dispatch(userActions.setAuthData(response.data));
 
                 return response.data;
-            } catch (e) {
-                console.log(e);
-                return rejectWithValue('error');
+            } catch (error) {
+                return rejectWithValue(handleAxiosError(error));
             }
         },
     );

@@ -1,5 +1,7 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
 import { AuthToken } from 'shared/const/api';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { userActions } from 'entities/User';
 
 interface AuthState {
     token: string | null;
@@ -20,22 +22,43 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [token, setToken] = useState<string | null>(localStorage.getItem(AuthToken));
 
+    const dispatch = useAppDispatch();
+
     const login = (newToken: string) => {
         localStorage.setItem(AuthToken, newToken);
         setToken(newToken);
     };
 
-    const logout = () => {
+    const logout = useCallback(() => {
         localStorage.removeItem(AuthToken);
         setToken(null);
-    };
+        dispatch(userActions.removeUserData());
+    }, [dispatch]);
 
     const value: AuthContextType = {
         token,
         isAuthenticated: !!token,
         login,
-        logout,
+        logout
     };
+
+    useEffect(() => {
+        const handleStorageChange = (event: StorageEvent) => {
+            if (event.key === AuthToken) {
+                if (!event.newValue) {
+                    logout();
+                }
+
+                setToken(event.newValue);
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, [logout]);
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

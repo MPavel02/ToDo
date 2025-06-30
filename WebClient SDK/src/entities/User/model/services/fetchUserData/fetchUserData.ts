@@ -2,11 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { API_ENDPOINT_V1 } from 'shared/const/api';
 import { User } from '../../types/user';
+import { ApiError, handleAxiosError } from 'shared/api/apiError';
 
 export const fetchUserData = createAsyncThunk<
     User,
     void,
-    ThunkConfig<string>
+    ThunkConfig<ApiError>
 >(
     'user/fetchUserData',
     async (_, thunkAPI) => {
@@ -23,9 +24,8 @@ export const fetchUserData = createAsyncThunk<
             }
 
             return response.data;
-        } catch (e) {
-            const error = e as Error;
-            return rejectWithValue(error.message);
+        } catch (error) {
+            return rejectWithValue(handleAxiosError(error));
         }
     },
 );
