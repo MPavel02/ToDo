@@ -13,12 +13,12 @@ const reducers: ReducersList = {
 };
 
 const NotesPage = ({ className }: NotesPageProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('notes');
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
             <Page className={classNames(cls.NotesPage, {}, [className])}>
-                {'Заметки'}
+                {t('Notes')}
             </Page>
         </DynamicModuleLoader>
     );

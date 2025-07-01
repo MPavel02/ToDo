@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDo.Domain.Entities;
-using ToDo.Domain.ValueObjects;
+using ToDo.DAL.Core.Persistence.Configurations;
+using ToDo.DAL.Entities;
 
 namespace ToDo.DAL.Persistence.Configurations;
 
@@ -22,17 +22,13 @@ internal class UserConfiguration : BaseEntityConfiguration<User>
             .HasForeignKey(note => note.UserID)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.OwnsOne(user => user.Username, nameBuilder =>
-        {
-            nameBuilder.Property(name => name.Value)
-                .HasColumnName(nameof(User.Username))
-                .HasMaxLength(Username.MaxLength)
-                .IsRequired();
-            
-            nameBuilder
-                .HasIndex(name => name.Value)
-                .IsUnique();
-        });
+        builder.Property(user => user.Username)
+            .HasColumnName(nameof(User.Username))
+            .HasMaxLength(64)
+            .IsRequired();
+        
+        builder.HasIndex(user => user.Username)
+            .IsUnique();
 
         builder.Property(user => user.PasswordHash)
             .IsRequired();

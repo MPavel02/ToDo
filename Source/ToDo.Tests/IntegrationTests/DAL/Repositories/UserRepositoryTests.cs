@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using ToDo.DAL.Repositories;
-using ToDo.Domain.Entities;
-using ToDo.Domain.Enums;
+using ToDo.Domain.DomainEntities;
 using ToDo.Domain.ValueObjects;
 using ToDo.Tests.Shared;
 
@@ -14,7 +13,7 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user = new User(Guid.NewGuid(), Username.From("TestName"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user = UserDomain.Create(Username.From("TestName"), string.Empty);
         user.AddNote("Новая заметка", "Детали заметки");
 
         var userRepository = new UserRepository(context);
@@ -25,7 +24,7 @@ public class UserRepositoryTests
         var getUserResult = await userRepository.GetByIDAsync(user.ID);
         
         // Assert
-        getUserResult.Should().Be(user);
+        getUserResult.Should().BeEquivalentTo(user); 
         getUserResult.Notes.Should().HaveCount(1);
     }
     
@@ -36,7 +35,7 @@ public class UserRepositoryTests
         var username = Username.From("TestName");
         
         await using var context = TestHelper.CreateContext();
-        var user1 = new User(Guid.NewGuid(), username, string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user1 = UserDomain.Create(username, string.Empty);
 
         var userRepository = new UserRepository(context);
         
@@ -54,8 +53,8 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
-        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user1 = UserDomain.Create(Username.From("TestName1"), string.Empty);
+        var user2 = UserDomain.Create(Username.From("TestName2"), string.Empty);
 
         var userRepository = new UserRepository(context);
         
@@ -74,7 +73,7 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user = UserDomain.Create(Username.From("TestName1"), string.Empty);
         var updatedName = Username.From("TestName2");
 
         var userRepository = new UserRepository(context);
@@ -83,15 +82,18 @@ public class UserRepositoryTests
         await userRepository.AddAsync(user);
         
         var getUserResult = await userRepository.GetByIDAsync(user.ID);
+
+        if (getUserResult is null)
+            return;
         
-        getUserResult?.ChangeName(updatedName);
+        getUserResult.ChangeName(updatedName);
         
-        await userRepository.UpdateAsync(user);
+        await userRepository.UpdateAsync(getUserResult);
         
         var getUpdatedUserResult = await userRepository.GetByIDAsync(user.ID);
         
         // Assert
-        getUpdatedUserResult?.Username.Should().Be(updatedName);
+        getUpdatedUserResult?.Username.Should().BeEquivalentTo(updatedName);
         getUpdatedUserResult?.UpdatedAt.Should().NotBeNull();
     }
     
@@ -100,8 +102,8 @@ public class UserRepositoryTests
     {
         // Arrange
         await using var context = TestHelper.CreateContext();
-        var user1 = new User(Guid.NewGuid(), Username.From("TestName1"), string.Empty, RoleTypes.User, DateTime.UtcNow);
-        var user2 = new User(Guid.NewGuid(), Username.From("TestName2"), string.Empty, RoleTypes.User, DateTime.UtcNow);
+        var user1 = UserDomain.Create(Username.From("TestName1"), string.Empty);
+        var user2 = UserDomain.Create(Username.From("TestName2"), string.Empty);
 
         var userRepository = new UserRepository(context);
         
@@ -109,7 +111,7 @@ public class UserRepositoryTests
         await userRepository.AddAsync(user1);
         await userRepository.AddAsync(user2);
         
-        await userRepository.DeleteAsync(user1);
+        await userRepository.DeleteAsync(user1.ID);
         
         var getUserResult = await userRepository.GetByIDAsync(user2.ID);
         var getUsersResult = await userRepository.GetAllAsync();
@@ -117,6 +119,6 @@ public class UserRepositoryTests
         // Assert
         getUsersResult.Should().HaveCount(1);
         getUserResult.Should().NotBeNull();
-        getUserResult.Should().Be(user2);
+        getUserResult.Should().BeEquivalentTo(user2);
     }
 }

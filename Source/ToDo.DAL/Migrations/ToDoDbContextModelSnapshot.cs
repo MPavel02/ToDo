@@ -97,7 +97,7 @@ namespace ToDo.DAL.Migrations
 
             modelBuilder.Entity("ToDo.Domain.Entities.User", b =>
                 {
-                    b.OwnsOne("ToDo.Domain.ValueObjects.Username", "Username", b1 =>
+                    b.OwnsOne("ToDo.Domain.Entities.User.Username#ToDo.Domain.ValueObjects.Username", "Username", b1 =>
                         {
                             b1.Property<Guid>("UserID")
                                 .HasColumnType("uuid");
@@ -113,7 +113,7 @@ namespace ToDo.DAL.Migrations
                             b1.HasIndex("Value")
                                 .IsUnique();
 
-                            b1.ToTable("Users");
+                            b1.ToTable("Users", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserID");

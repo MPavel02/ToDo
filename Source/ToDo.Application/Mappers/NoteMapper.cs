@@ -1,37 +1,37 @@
 ﻿using ToDo.Application.Models.Note;
-using ToDo.Domain.Entities;
+using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Application.Mappers;
 
 public static class NoteMapper
 {
-    public static NoteDto Map(this Note note)
+    public static NoteDto Map(this NoteDomain noteDomain)
     {
         return new NoteDto
         {
-            ID = note.ID,
-            Title = note.Title,
-            Details = note.Details,
-            CreatedAt = note.CreatedAt,
-            UpdatedAt = note.UpdatedAt
+            ID = noteDomain.ID,
+            Title = noteDomain.Title,
+            Details = noteDomain.Details,
+            CreatedAt = noteDomain.CreatedAt,
+            UpdatedAt = noteDomain.UpdatedAt
         };
     }
     
-    public static NoteLookupDto MapToLookup(this Note note)
+    public static NoteLookupDto MapToLookup(this NoteDomain noteDomain)
     {
         return new NoteLookupDto
         {
-            ID = note.ID,
-            Title = note.Title
+            ID = noteDomain.ID,
+            Title = noteDomain.Title
         };
     }
     
-    public static ICollection<NoteDto> Map(this IEnumerable<Note> notes)
+    public static ICollection<NoteDto> Map(this IEnumerable<NoteDomain> notes)
     {
         return notes.Select(Map).ToList();
     }
     
-    public static ICollection<NoteLookupDto> MapToLookup(this IEnumerable<Note> notes)
+    public static ICollection<NoteLookupDto> MapToLookup(this IEnumerable<NoteDomain> notes)
     {
         return notes.Select(MapToLookup).ToList();
     }

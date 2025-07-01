@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.WebAPI", "ToDo.WebAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.DAL.ClickHouse.Logs", "ToDo.DAL.ClickHouse.Logs\ToDo.DAL.ClickHouse.Logs.csproj", "{C1E45384-C0F1-47C7-A4F7-68F8268EE52C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.DAL.Core", "ToDo.DAL.Core\ToDo.DAL.Core.csproj", "{D89768BF-8EA4-43A4-AC73-510BB7F91F0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{C1E45384-C0F1-47C7-A4F7-68F8268EE52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1E45384-C0F1-47C7-A4F7-68F8268EE52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1E45384-C0F1-47C7-A4F7-68F8268EE52C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89768BF-8EA4-43A4-AC73-510BB7F91F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89768BF-8EA4-43A4-AC73-510BB7F91F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89768BF-8EA4-43A4-AC73-510BB7F91F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89768BF-8EA4-43A4-AC73-510BB7F91F0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

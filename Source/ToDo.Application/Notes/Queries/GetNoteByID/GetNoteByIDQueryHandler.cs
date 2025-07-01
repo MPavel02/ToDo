@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ToDo.Application.Mappers;
 using ToDo.Application.Models.Note;
-using ToDo.Domain.Entities;
+using ToDo.Domain.DomainEntities;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
 
@@ -15,7 +15,7 @@ public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestH
 
         if (note is null)
         {
-            throw new NotFoundException(nameof(Note), request.ID);
+            throw new NotFoundException(nameof(NoteDomain), request.ID);
         }
         
         return note.Map();

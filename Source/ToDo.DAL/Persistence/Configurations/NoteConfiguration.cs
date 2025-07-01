@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDo.Domain.Entities;
+using ToDo.DAL.Core.Persistence.Configurations;
+using ToDo.DAL.Entities;
 
 namespace ToDo.DAL.Persistence.Configurations;
 

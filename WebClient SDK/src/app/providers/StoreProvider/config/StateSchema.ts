@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { ScrollRestorationSchema } from 'widgets/Page';
 import { LoginSchema } from 'features/Authorization';
 import { UserSchema } from 'entities/User';
+import { UsersPageSchema } from 'pages/UsersPage';
 
 export interface StateSchema {
     user: UserSchema;
@@ -10,6 +11,7 @@ export interface StateSchema {
 
     // Асинхронные редюсеры
     loginForm?: LoginSchema;
+    usersPage?: UsersPageSchema;
     // profileCourse?: ProfileCourseSchema;
     // articleDetails?: ArticleDetailsSchema;
     // addCommentForm?: AddCommentFormSchema;

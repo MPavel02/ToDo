@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ToDo.Application.Auth.Commands.LoginCommand;
+using ToDo.Application.Auth.Commands;
 using ToDo.Application.Constants;
 
 namespace ToDo.Application.Auth.Validators;

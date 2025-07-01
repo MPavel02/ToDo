@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Notes.Commands.CreateNote;
-using ToDo.Application.Notes.Commands.DeleteNote;
-using ToDo.Application.Notes.Commands.UpdateNote;
+using ToDo.Application.Notes.Commands;
 using ToDo.Application.Notes.Queries.GetAllNotes;
 using ToDo.Application.Notes.Queries.GetNoteByID;
 using ToDo.WebAPI.Models.Note;

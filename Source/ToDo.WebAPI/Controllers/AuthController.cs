@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Auth.Commands.LoginCommand;
-using ToDo.Application.Auth.Commands.RegisterCommand;
+using ToDo.Application.Auth.Commands;
 using ToDo.Application.Models.Auth;
 
 namespace ToDo.WebAPI.Controllers;

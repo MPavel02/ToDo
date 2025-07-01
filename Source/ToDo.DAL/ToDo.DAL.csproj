@@ -7,15 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.17" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.17">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\ToDo.DAL.Core\ToDo.DAL.Core.csproj" />
       <ProjectReference Include="..\ToDo.Domain\ToDo.Domain.csproj" />
     </ItemGroup>
 

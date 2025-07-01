@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDo.Domain.Entities;
+using ToDo.DAL.ClickHouse.Logs.Models;
+using ToDo.DAL.Core.Entities;
 
 namespace ToDo.DAL.ClickHouse.Logs.Persistence.Configurations;
 

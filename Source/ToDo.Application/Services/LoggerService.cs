@@ -1,5 +1,5 @@
 ﻿using ToDo.Domain.BackgroundServices;
-using ToDo.Domain.Entities;
+using ToDo.Domain.DomainEntities;
 using ToDo.Domain.Enums;
 using ToDo.Domain.Extensions;
 using ToDo.Domain.Services;
@@ -13,12 +13,7 @@ public class LoggerService(ILogQueue logQueue) : ILoggerService
         string message,
         Exception? exception = null)
     {
-        var log = new LogEntry(
-            Guid.NewGuid(),
-            DateTime.UtcNow,
-            logLevel,
-            message,
-            exception?.ToText());
+        var log = LogEntryDomain.Create(logLevel, message, exception?.ToText());
 
         logQueue.Enqueue(log);
     }

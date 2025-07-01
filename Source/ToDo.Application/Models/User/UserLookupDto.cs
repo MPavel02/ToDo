@@ -1,10 +1,9 @@
-﻿using ToDo.Application.Models.Note;
+﻿using ToDo.Domain.Enums;
 
 namespace ToDo.Application.Models.User;
 
-public class UserLookupDto
+public class UserLookupDto : BaseEntityDto
 {
-    public Guid ID { get; set; }
     public string Username { get; set; }
-    public ICollection<NoteLookupDto> Notes { get; set; }
+    public RoleTypes Role { get; set; }
 }

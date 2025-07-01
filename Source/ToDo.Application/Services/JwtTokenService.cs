@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ToDo.Application.Models.Settings;
-using ToDo.Domain.Entities;
+using ToDo.Domain.DomainEntities;
 using ToDo.Domain.Services;
 
 namespace ToDo.Application.Services;
@@ -13,13 +13,13 @@ public class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
 {
     private readonly JwtOptions _settings = options.Value;
     
-    public string GenerateToken(User user)
+    public string GenerateToken(UserDomain userDomain)
     {
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-            new Claim(ClaimTypes.Name, user.Username.Value),
-            new Claim(ClaimTypes.Role, user.Role.ToString())
+            new Claim(ClaimTypes.NameIdentifier, userDomain.ID.ToString()),
+            new Claim(ClaimTypes.Name, userDomain.Username.Value),
+            new Claim(ClaimTypes.Role, userDomain.Role.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.TokenPrivateKey));

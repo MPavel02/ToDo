@@ -1,11 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Application.Users.Commands.DeleteUser;
-using ToDo.Application.Users.Commands.UpdateUser;
-using ToDo.Application.Users.Queries.GetAllUsers;
-using ToDo.Application.Users.Queries.GetUserByID;
-using ToDo.Application.Users.Queries.GetUserInfo;
+using ToDo.Application.Users.Commands;
+using ToDo.Application.Users.Queries;
 using ToDo.Domain.ValueObjects;
 using ToDo.WebAPI.Models.User;
 

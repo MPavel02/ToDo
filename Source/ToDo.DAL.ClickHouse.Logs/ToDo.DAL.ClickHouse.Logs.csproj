@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="EntityFrameworkCore.ClickHouse" Version="0.0.22" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.17" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\ToDo.DAL.Core\ToDo.DAL.Core.csproj" />
       <ProjectReference Include="..\ToDo.Domain\ToDo.Domain.csproj" />
     </ItemGroup>
 

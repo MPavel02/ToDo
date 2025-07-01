@@ -1,0 +1,15 @@
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\bin\Debug\net8.0\ToDo.DAL.Core.deps.json
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\bin\Debug\net8.0\ToDo.DAL.Core.runtimeconfig.json
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\bin\Debug\net8.0\ToDo.DAL.Core.dll
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\bin\Debug\net8.0\ToDo.DAL.Core.pdb
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.csproj.AssemblyReference.cache
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.AssemblyInfoInputs.cache
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.AssemblyInfo.cs
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.csproj.CoreCompileInputs.cache
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.sourcelink.json
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.dll
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\refint\ToDo.DAL.Core.dll
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.pdb
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ToDo.DAL.Core.genruntimeconfig.cache
+C:\Users\R2D2\Documents\GitFork\ToDo\Source\ToDo.DAL.Core\obj\Debug\net8.0\ref\ToDo.DAL.Core.dll

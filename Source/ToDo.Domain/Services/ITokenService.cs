@@ -1,8 +1,8 @@
-﻿using ToDo.Domain.Entities;
+﻿using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Domain.Services;
 
 public interface ITokenService
 {
-    string GenerateToken(User user);
+    string GenerateToken(UserDomain userDomain);
 }

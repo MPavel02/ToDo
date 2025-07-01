@@ -1,22 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDo.DAL.ClickHouse.Logs.Mappers;
 using ToDo.DAL.ClickHouse.Logs.Persistence;
-using ToDo.Domain.Entities;
+using ToDo.Domain.DomainEntities;
 using ToDo.Domain.Repositories;
 
 namespace ToDo.DAL.ClickHouse.Logs.Repositories;
 
 public class LogRepository(LogsDbContext context) : ILogRepository
 {
-    public async Task<IList<LogEntry>> GetAllBeforeDateAsync(DateTime receiptDate, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<LogEntryDomain>> GetAllBeforeDateAsync(DateTime receiptDate, CancellationToken cancellationToken = default)
     {
-        return await context.Logs
+        var logs = await context.Logs
             .Where(l => l.Timestamp < receiptDate)
             .ToListAsync(cancellationToken: cancellationToken);
+        
+        return logs.Map();
     }
 
-    public async Task AddAsync(LogEntry entity, CancellationToken cancellationToken = default)
+    public async Task AddAsync(LogEntryDomain entity, CancellationToken cancellationToken = default)
     {
-        await context.Logs.AddAsync(entity, cancellationToken);
+        await context.Logs.AddAsync(entity.Map(), cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
 

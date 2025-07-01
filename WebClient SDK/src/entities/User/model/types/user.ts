@@ -1,12 +1,17 @@
 import { ApiError } from 'shared/api/apiError';
+import { BaseEntity } from 'entities/BaseEntity';
 
-export interface User {
-    id: string;
+export interface UserLookup extends BaseEntity {
     username: string;
     role: UserRole;
-    createdAt: Date;
-    updatedAt: Date;
+}
+
+export interface User extends UserLookup {
     notes: [];
+}
+
+export interface UserLookupList {
+    users: UserLookup[];
 }
 
 export enum UserRole {

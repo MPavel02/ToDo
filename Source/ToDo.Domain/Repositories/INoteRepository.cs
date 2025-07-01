@@ -1,12 +1,12 @@
-﻿using ToDo.Domain.Entities;
+﻿using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Domain.Repositories;
 
 public interface INoteRepository
 {
-    Task<Note?> GetByIDAsync(Guid ID, CancellationToken cancellationToken = default);
-    Task<IList<Note>> GetAllByIDAsync(Guid userID, CancellationToken cancellationToken = default);
-    Task AddAsync(Note entity, CancellationToken cancellationToken = default);
-    Task UpdateAsync(Note entity, CancellationToken cancellationToken = default);
-    Task DeleteAsync(Note entity, CancellationToken cancellationToken = default);
+    Task<NoteDomain?> GetByIDAsync(Guid ID, CancellationToken cancellationToken = default);
+    Task<IEnumerable<NoteDomain>> GetAllByIDAsync(Guid userID, CancellationToken cancellationToken = default);
+    Task AddAsync(NoteDomain entity, CancellationToken cancellationToken = default);
+    Task UpdateAsync(NoteDomain entity, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Guid ID, CancellationToken cancellationToken = default);
 }

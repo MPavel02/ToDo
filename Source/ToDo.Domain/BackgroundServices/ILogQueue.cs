@@ -1,9 +1,9 @@
-﻿using ToDo.Domain.Entities;
+﻿using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Domain.BackgroundServices;
 
 public interface ILogQueue
 {
-    void Enqueue(LogEntry log);
-    bool TryDequeue(out LogEntry? log);
+    void Enqueue(LogEntryDomain log);
+    bool TryDequeue(out LogEntryDomain? log);
 }

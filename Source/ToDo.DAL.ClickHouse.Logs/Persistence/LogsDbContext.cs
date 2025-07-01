@@ -1,7 +1,7 @@
 ﻿using ClickHouse.EntityFrameworkCore.Extensions;
 using Microsoft.EntityFrameworkCore;
+using ToDo.DAL.ClickHouse.Logs.Models;
 using ToDo.DAL.ClickHouse.Logs.Persistence.Configurations;
-using ToDo.Domain.Entities;
 
 namespace ToDo.DAL.ClickHouse.Logs.Persistence;
 
