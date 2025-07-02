@@ -4,6 +4,8 @@ ToDo.Application/bin
 ToDo.Application/obj
 ToDo.DAL/bin
 ToDo.DAL/obj
+ToDo.DAL.Core/bin
+ToDo.DAL.Core/obj
 ToDo.DAL.ClickHouse.Logs/bin
 ToDo.DAL.ClickHouse.Logs/obj
 ToDo.Domain/bin
