@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Application.Auth.Commands;
 using ToDo.Application.Models.Auth;
+using ToDo.WebAPI.Models.Auth;
 
 namespace ToDo.WebAPI.Controllers;
 

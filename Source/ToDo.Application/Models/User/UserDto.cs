@@ -1,5 +1,4 @@
 ﻿using ToDo.Application.Models.Note;
-using ToDo.Domain.Enums;
 
 namespace ToDo.Application.Models.User;
 
