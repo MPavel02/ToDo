@@ -1,0 +1,7 @@
+{
+  "Username": "Имя пользователя",
+  "Role": "Роль",
+  "ErrorMessage": "Сообщение ошибки",
+  "ErrorDetails": "Детали ошибки",
+  "ErrorStatusCode": "Статус код ошибки"
+}

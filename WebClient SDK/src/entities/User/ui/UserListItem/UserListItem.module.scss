@@ -1,0 +1,10 @@
+.UserListItem {
+    .infoWrapper {
+        display: flex;
+        align-items: center;
+
+        .infoTitle {
+            margin-right: 5px;
+        }
+    }
+}

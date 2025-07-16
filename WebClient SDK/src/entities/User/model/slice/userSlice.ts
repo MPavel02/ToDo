@@ -16,6 +16,7 @@ export const userSlice = createSlice({
         },
         removeUserData: (state) => {
             state.userData = undefined;
+            state.authData = undefined;
         },
     },
     extraReducers: (builder) => {

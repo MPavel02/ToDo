@@ -34,7 +34,10 @@ const usersPageSlice = createSlice({
                 state.isLoading = false;
                 usersAdapter.setAll(state, action.payload.users);
             })
-            .addCase(fetchUsersList.rejected, (state, action) => {
+            .addCase(fetchUsersList.rejected, (
+                state,
+                action
+            ) => {
                 state.isLoading = false;
                 state.error = action.payload;
             });

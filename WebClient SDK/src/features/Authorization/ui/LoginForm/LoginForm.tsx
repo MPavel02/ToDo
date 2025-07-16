@@ -10,7 +10,12 @@ import { loginByUsername } from 'features/Authorization/model/services/loginByUs
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getLoginError, getLoginIsLoading, getLoginPassword, getLoginUsername } from 'features/Authorization';
+import {
+    getLoginError,
+    getLoginIsLoading,
+    getLoginPassword,
+    getLoginUsername
+} from '../../model/selectors/loginSelectors';
 import { useAuth } from 'shared/lib/hooks/useAuth/useAuth';
 import { getAuthToken } from 'entities/User';
 

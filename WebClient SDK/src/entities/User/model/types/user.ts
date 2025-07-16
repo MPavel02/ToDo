@@ -1,22 +1,33 @@
 import { ApiError } from 'shared/api/apiError';
 import { BaseEntity } from 'entities/BaseEntity';
 
+export enum UserRole {
+    Admin,
+    User
+}
+
+export function getUserRole(role: UserRole): string {
+    switch (role) {
+        case UserRole.Admin:
+            return 'Admin';
+        case UserRole.User:
+            return 'User';
+        default:
+            return 'Not found role';
+    }
+}
+
 export interface UserLookup extends BaseEntity {
     username: string;
     role: UserRole;
-}
-
-export interface User extends UserLookup {
-    notes: [];
 }
 
 export interface UserLookupList {
     users: UserLookup[];
 }
 
-export enum UserRole {
-    Admin,
-    User
+export interface User extends UserLookup {
+    notes: [];
 }
 
 export interface AuthResult {
