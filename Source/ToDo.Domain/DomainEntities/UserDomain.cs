@@ -44,8 +44,7 @@ public class UserDomain : BaseEntityDomainWithDates
         string passwordHash,
         RoleTypes role,
         IReadOnlyCollection<NoteDomain> notes)
-    {
-        return new UserDomain(
+        => new(
             ID,
             createdAt,
             updatedAt,
@@ -53,8 +52,7 @@ public class UserDomain : BaseEntityDomainWithDates
             passwordHash,
             role,
             notes);
-    }
-    
+
     /// <summary>
     /// Хэш пароля пользователя.
     /// </summary>
@@ -95,6 +93,7 @@ public class UserDomain : BaseEntityDomainWithDates
     public void AddNote(string title, string details)
     {
         _notes.Add(NoteDomain.Create(ID, title, details));
+        SetUpdatedAt(DateTime.UtcNow);
     }
     
     /// <summary>

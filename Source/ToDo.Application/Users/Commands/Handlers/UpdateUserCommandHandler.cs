@@ -18,11 +18,6 @@ public class UpdateUserCommandHandler(IUserRepository userRepository) : IRequest
         }
         
         user.ChangeName(Username.From(request.Username));
-
-        foreach (var note in request.Notes)
-        {
-            user.UpdateNote(note.ID, note.Title, note.Details);
-        }
         
         await userRepository.UpdateAsync(user, cancellationToken);
         

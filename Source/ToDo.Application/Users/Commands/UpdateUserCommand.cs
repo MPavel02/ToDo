@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using ToDo.Application.Models.Note;
 
 namespace ToDo.Application.Users.Commands;
 
-public class UpdateUserCommand : IRequest<Unit>
+public class UpdateUserCommand(Guid ID, string username) : IRequest<Unit>
 {
-    public Guid ID { get; set; }
-    public required string Username { get; set; }
-    public ICollection<UpdateNoteModel> Notes { get; set; }
+    public Guid ID { get; } = ID;
+    public string Username { get; } = username;
 }

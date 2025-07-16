@@ -44,12 +44,7 @@ public class UsersController(IMediator mediator) : ApiBaseController
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update([FromBody] UpdateUserDto request, CancellationToken cancellationToken = default)
     {
-        await mediator.Send(new UpdateUserCommand
-        {
-            ID = request.ID,
-            Username = request.Username,
-            Notes = request.Notes
-        }, cancellationToken);
+        await mediator.Send(new UpdateUserCommand(request.ID, request.Username), cancellationToken);
         
         return NoContent();
     }
