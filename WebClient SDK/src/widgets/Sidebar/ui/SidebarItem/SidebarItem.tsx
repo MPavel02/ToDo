@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
 import { SidebarItemType } from '../../model/types/sidebar';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
-import { getUserRole, UserRole } from 'entities/User';
+import { getCurrentUser, UserRole } from 'entities/User';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -26,9 +26,9 @@ export const SidebarItem = memo((props: SidebarItemProps) => {
     const location = useLocation();
     const isActive = location.pathname === item.path;
 
-    const userRole = useSelector(getUserRole);
+    const user = useSelector(getCurrentUser);
 
-    if (item.isAdmin && userRole !== UserRole.Admin) {
+    if (item.isAdmin && user?.role !== UserRole.Admin) {
         return null;
     }
 

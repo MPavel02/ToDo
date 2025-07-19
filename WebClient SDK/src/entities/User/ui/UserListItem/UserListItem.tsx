@@ -21,7 +21,11 @@ export const UserListItem = memo((props: UserListItemProps) => {
     const { t } = useTranslation();
 
     return (
-        <Button as={'link'} to={RoutePath.not_found} className={classNames(cls.UserListItem, {}, [className])}>
+        <Button
+            as={'link'}
+            to={RoutePath.user_details + user.id}
+            className={classNames(cls.UserListItem, {}, [className])}
+        >
             <Card>
                 <div className={cls.infoWrapper}>
                     <Text className={cls.infoTitle} text={t('Username') + ':'}/>

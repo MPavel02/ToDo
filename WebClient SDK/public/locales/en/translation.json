@@ -1,4 +1,9 @@
 {
   "Username": "User name",
-  "Role": "Role"
+  "Role": "Role",
+  "CreatedAt": "Created at",
+  "UpdatedAt": "Updated at",
+  "ErrorMessage": "Error message",
+  "ErrorDetails": "Error details",
+  "ErrorStatusCode": "Error status code"
 }

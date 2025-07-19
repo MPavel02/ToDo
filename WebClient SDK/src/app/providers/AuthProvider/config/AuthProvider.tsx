@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
 import { AuthToken } from 'shared/const/api';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { userActions } from 'entities/User';
+import { currentUserActions } from 'entities/User';
 
 interface AuthState {
     token: string | null;
@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const logout = useCallback(() => {
         localStorage.removeItem(AuthToken);
         setToken(null);
-        dispatch(userActions.removeUserData());
+        dispatch(currentUserActions.removeUserData());
     }, [dispatch]);
 
     const value: AuthContextType = {

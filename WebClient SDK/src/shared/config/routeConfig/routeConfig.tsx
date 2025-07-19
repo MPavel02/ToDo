@@ -4,6 +4,7 @@ import { NotesPage } from 'pages/NotesPage';
 import { MainPage } from 'pages/MainPage';
 import { LogsPage } from 'pages/LogsPage';
 import { UsersPage } from 'pages/UsersPage';
+import { UserDetailsPage } from 'pages/UserDetailsPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -13,6 +14,7 @@ export enum AppRoutes {
     MAIN = 'main',
     LOGS = 'logs',
     USERS = 'users',
+    USER_DETAILS = 'user_details',
     NOTES = 'notes',
     NOTE_DETAILS = 'note_details',
     NOTE_CREATE = 'note_create',
@@ -27,6 +29,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.LOGS]: '/logs',
     [AppRoutes.USERS]: '/users',
+    [AppRoutes.USER_DETAILS]: '/users/',
     [AppRoutes.NOTES]: '/notes',
     [AppRoutes.NOTE_DETAILS]: '/notes/',
     [AppRoutes.NOTE_CREATE]: '/notes/create',
@@ -51,6 +54,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.USERS]: {
         path: RoutePath.users,
         element: <UsersPage/>,
+        authOnly: true
+    },
+    [AppRoutes.USER_DETAILS]: {
+        path: `${RoutePath.user_details}:id`,
+        element: <UserDetailsPage/>,
         authOnly: true
     },
     [AppRoutes.NOTES]: {

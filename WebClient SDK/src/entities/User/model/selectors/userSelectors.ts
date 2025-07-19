@@ -1,5 +1,5 @@
 import { StateSchema } from 'app/providers/StoreProvider';
-import { UserRole } from '../types/user';
 
-export const getAuthToken = (state: StateSchema) => state.user.authData?.token ?? '';
-export const getUserRole = (state: StateSchema) => state.user.userData?.role ?? UserRole.User;
+export const getCurrentUserAuthToken = (state: StateSchema) => state.currentUser.authData?.token ?? '';
+export const getCurrentUser = (state: StateSchema) => state.currentUser.userData;
+export const getUser = (state: StateSchema) => state.user?.userData;

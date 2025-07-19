@@ -6,7 +6,7 @@ export enum UserRole {
     User
 }
 
-export function getUserRole(role: UserRole): string {
+export function getUserRole(role: UserRole | undefined): string {
     switch (role) {
         case UserRole.Admin:
             return 'Admin';
@@ -35,9 +35,12 @@ export interface AuthResult {
 }
 
 export interface UserSchema {
-    authData?: AuthResult;
     userData?: User;
 
     isLoading: boolean;
     error?: ApiError;
+}
+
+export interface CurrentUserSchema extends UserSchema {
+    authData?: AuthResult;
 }

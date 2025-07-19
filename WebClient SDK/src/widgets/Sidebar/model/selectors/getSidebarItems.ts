@@ -2,12 +2,12 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 
 import { SidebarItemType } from '../types/sidebar';
-import { getUserRole, UserRole } from 'entities/User';
+import { getCurrentUser, UserRole } from 'entities/User';
 import { Notebook, ServerCrash, Users } from 'lucide-react';
 
 export const getSidebarItems = createSelector(
-    getUserRole,
-    (userRole) => {
+    getCurrentUser,
+    (user) => {
         const sidebarItemsList: SidebarItemType[] = [
             {
                 path: RoutePath.notes,
@@ -16,7 +16,7 @@ export const getSidebarItems = createSelector(
             }
         ];
 
-        if (userRole === UserRole.Admin) {
+        if (user?.role === UserRole.Admin) {
             sidebarItemsList.push(
                 {
                     path: RoutePath.logs,

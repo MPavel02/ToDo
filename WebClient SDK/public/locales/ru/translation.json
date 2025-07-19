@@ -1,6 +1,8 @@
 {
   "Username": "Имя пользователя",
   "Role": "Роль",
+  "CreatedAt": "Создан",
+  "UpdatedAt": "Изменен",
   "ErrorMessage": "Сообщение ошибки",
   "ErrorDetails": "Детали ошибки",
   "ErrorStatusCode": "Статус код ошибки"

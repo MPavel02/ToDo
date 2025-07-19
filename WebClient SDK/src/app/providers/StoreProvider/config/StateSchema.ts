@@ -2,20 +2,17 @@ import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } f
 import { AxiosInstance } from 'axios';
 import { ScrollRestorationSchema } from 'widgets/Page';
 import { LoginSchema } from 'features/Authorization';
-import { UserSchema } from 'entities/User';
 import { UsersPageSchema } from 'pages/UsersPage';
+import { CurrentUserSchema, UserSchema } from 'entities/User';
 
 export interface StateSchema {
-    user: UserSchema;
+    currentUser: CurrentUserSchema;
     scrollRestoration: ScrollRestorationSchema;
 
     // Асинхронные редюсеры
     loginForm?: LoginSchema;
     usersPage?: UsersPageSchema;
-    // profileCourse?: ProfileCourseSchema;
-    // articleDetails?: ArticleDetailsSchema;
-    // addCommentForm?: AddCommentFormSchema;
-    // articlesPage?: ArticlesPageSchema;
+    user?: UserSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

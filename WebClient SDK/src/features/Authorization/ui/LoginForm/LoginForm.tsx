@@ -17,7 +17,7 @@ import {
     getLoginUsername
 } from '../../model/selectors/loginSelectors';
 import { useAuth } from 'shared/lib/hooks/useAuth/useAuth';
-import { getAuthToken } from 'entities/User';
+import { getCurrentUserAuthToken } from 'entities/User';
 
 export interface LoginFormProps {
     className?: string;
@@ -41,7 +41,7 @@ const LoginForm = ({ className, onSuccess }: LoginFormProps) => {
     const password = useSelector(getLoginPassword);
     const isLoading = useSelector(getLoginIsLoading);
     const error = useSelector(getLoginError);
-    const token = useSelector(getAuthToken);
+    const token = useSelector(getCurrentUserAuthToken);
 
     const onChangeUsername = useCallback((value: string) => {
         setIsUsernameEmpty(!value);

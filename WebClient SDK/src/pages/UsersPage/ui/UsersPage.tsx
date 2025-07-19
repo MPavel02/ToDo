@@ -4,7 +4,7 @@ import { memo, useEffect } from 'react';
 import { Page } from 'widgets/Page';
 import { useSelector } from 'react-redux';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { fetchUsersList } from 'pages/UsersPage/model/services/fetchUsersList/fetchUsersList';
+import { fetchUserList } from 'pages/UsersPage/model/services/fetchUserList/fetchUserList';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'shared/ui/Text/Text';
@@ -34,11 +34,11 @@ const UsersPage = (props: UsersPageProps) => {
     const error = useSelector(getUsersPageError);
 
     useEffect(() => {
-        dispatch(fetchUsersList());
+        dispatch(fetchUserList());
     }, [dispatch]);
 
     return (
-        <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
+        <DynamicModuleLoader reducers={reducers}>
             <Page className={classNames('', {}, [className])}>
                 {error
                     ? <Error apiError={error}/>

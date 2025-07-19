@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthResult, UserSchema } from '../types/user';
-import { fetchUserData } from '../services/fetchUserData/fetchUserData';
+import { createSlice } from '@reduxjs/toolkit';
+import { UserSchema } from '../types/user';
+import { fetchUserDataByID } from '../services/fetchUserDataByID/fetchUserDataByID';
 
 const initialState: UserSchema = {
     isLoading: false,
@@ -9,27 +9,19 @@ const initialState: UserSchema = {
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState,
-    reducers: {
-        setAuthData: (state, action: PayloadAction<AuthResult>) => {
-            state.authData = action.payload;
-        },
-        removeUserData: (state) => {
-            state.userData = undefined;
-            state.authData = undefined;
-        },
-    },
+    initialState: initialState,
+    reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUserData.pending, (state) => {
+            .addCase(fetchUserDataByID.pending, (state) => {
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchUserData.fulfilled, (state, action) => {
+            .addCase(fetchUserDataByID.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.userData = action.payload;
             })
-            .addCase(fetchUserData.rejected, (state, action) => {
+            .addCase(fetchUserDataByID.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             });

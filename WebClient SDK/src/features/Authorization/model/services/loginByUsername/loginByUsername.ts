@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { AuthResult } from 'entities/User/model/types/user';
-import { userActions } from 'entities/User';
+import { currentUserActions } from 'entities/User';
 import { API_ENDPOINT_V1 } from 'shared/const/api';
 import { ApiError, handleAxiosError } from 'shared/api/apiError';
 
@@ -29,7 +29,7 @@ export const loginByUsername
                     throw new Error();
                 }
 
-                dispatch(userActions.setAuthData(response.data));
+                dispatch(currentUserActions.setAuthData(response.data));
 
                 return response.data;
             } catch (error) {

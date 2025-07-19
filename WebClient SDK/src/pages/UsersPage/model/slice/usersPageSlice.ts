@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { UsersPageSchema } from 'pages/UsersPage';
-import { fetchUsersList } from '../services/fetchUsersList/fetchUsersList';
+import { fetchUserList } from 'pages/UsersPage/model/services/fetchUserList/fetchUserList';
 import { UserLookup } from 'entities/User';
 
 const usersAdapter = createEntityAdapter<UserLookup>({
@@ -23,18 +23,18 @@ const usersPageSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUsersList.pending, (state) => {
+            .addCase(fetchUserList.pending, (state) => {
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchUsersList.fulfilled, (
+            .addCase(fetchUserList.fulfilled, (
                 state,
                 action
             ) => {
                 state.isLoading = false;
                 usersAdapter.setAll(state, action.payload.users);
             })
-            .addCase(fetchUsersList.rejected, (
+            .addCase(fetchUserList.rejected, (
                 state,
                 action
             ) => {
