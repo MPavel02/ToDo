@@ -39,7 +39,7 @@ public class UserMapperTests
         
         // Assert
         _userDomain.Notes.Should().HaveCount(1);
-        _userDomain.UpdatedAt.Should().BeNull();
+        _userDomain.UpdatedAt.Should().NotBeNull();
     }
     
     [Fact]
