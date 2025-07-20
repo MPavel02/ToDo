@@ -87,8 +87,8 @@ public static class ServiceCollectionsExtensions
             });
         
         builder.Services.AddAuthorizationBuilder()
-            .AddPolicy(nameof(RoleTypes.Admin), policy => policy.RequireRole(RoleTypes.Admin.ToString()))
-            .AddPolicy(nameof(RoleTypes.User), policy => policy.RequireRole(RoleTypes.User.ToString()));
+            .AddPolicy(nameof(RoleTypes.Admin), policy => policy.RequireRole(nameof(RoleTypes.Admin)))
+            .AddPolicy(nameof(RoleTypes.User), policy => policy.RequireRole(nameof(RoleTypes.User)));
         
         return builder;
     }

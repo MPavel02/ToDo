@@ -5,9 +5,9 @@ using ToDo.Domain.DomainEntities;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
 
-namespace ToDo.Application.Notes.Queries.GetNoteByID;
+namespace ToDo.Application.Notes.Queries.Handlers;
 
-public class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteByIDQuery, NoteDto>
+internal class GetNoteByIDQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteByIDQuery, NoteDto>
 {
     public async Task<NoteDto> Handle(GetNoteByIDQuery request, CancellationToken cancellationToken)
     {

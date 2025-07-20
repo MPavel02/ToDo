@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ToDo.Application.Models.Note;
 
-namespace ToDo.Application.Notes.Queries.GetAllNotes;
+namespace ToDo.Application.Notes.Queries;
 
 public class GetNoteListQuery : IRequest<NoteListDto>
 {

@@ -5,7 +5,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Queries.Handlers;
 
-public class GetUserListQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserListQuery, UserListDto>
+internal class GetUserListQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserListQuery, UserListDto>
 {
     public async Task<UserListDto> Handle(GetUserListQuery request, CancellationToken cancellationToken)
     {

@@ -3,9 +3,9 @@ using ToDo.Application.Mappers;
 using ToDo.Application.Models.Note;
 using ToDo.Domain.Repositories;
 
-namespace ToDo.Application.Notes.Queries.GetAllNotes;
+namespace ToDo.Application.Notes.Queries.Handlers;
 
-public class GetNoteListQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteListQuery, NoteListDto>
+internal class GetNoteListQueryHandler(INoteRepository noteRepository) : IRequestHandler<GetNoteListQuery, NoteListDto>
 {
     public async Task<NoteListDto> Handle(GetNoteListQuery request, CancellationToken cancellationToken)
     {

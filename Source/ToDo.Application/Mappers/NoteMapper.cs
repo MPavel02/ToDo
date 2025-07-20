@@ -3,7 +3,7 @@ using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Application.Mappers;
 
-public static class NoteMapper
+internal static class NoteMapper
 {
     public static NoteDto Map(this NoteDomain noteDomain)
     {

@@ -7,7 +7,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Queries.Handlers;
 
-public class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserByIDQuery, UserDto>
+internal class GetUserByIDQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserByIDQuery, UserDto>
 {
     public async Task<UserDto> Handle(GetUserByIDQuery request, CancellationToken cancellationToken)
     {

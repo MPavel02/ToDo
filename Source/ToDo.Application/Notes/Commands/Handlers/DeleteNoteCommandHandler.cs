@@ -5,7 +5,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Commands.Handlers;
 
-public class DeleteNoteCommandHandler(INoteRepository noteRepository) : IRequestHandler<DeleteNoteCommand, Unit>
+internal class DeleteNoteCommandHandler(INoteRepository noteRepository) : IRequestHandler<DeleteNoteCommand, Unit>
 {
     public async Task<Unit> Handle(DeleteNoteCommand request, CancellationToken cancellationToken)
     {

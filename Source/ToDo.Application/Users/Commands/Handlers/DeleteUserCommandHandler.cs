@@ -5,7 +5,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Users.Commands.Handlers;
 
-public class DeleteUserCommandHandler(IUserRepository userRepository) : IRequestHandler<DeleteUserCommand, Unit>
+internal class DeleteUserCommandHandler(IUserRepository userRepository) : IRequestHandler<DeleteUserCommand, Unit>
 {
     public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {

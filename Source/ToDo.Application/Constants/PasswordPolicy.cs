@@ -1,6 +1,6 @@
 ﻿namespace ToDo.Application.Constants;
 
-public static class PasswordPolicy
+internal static class PasswordPolicy
 {
     public const string PasswordRegular = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$";
     

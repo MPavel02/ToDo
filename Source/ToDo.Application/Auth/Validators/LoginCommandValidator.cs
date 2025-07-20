@@ -4,7 +4,7 @@ using ToDo.Application.Constants;
 
 namespace ToDo.Application.Auth.Validators;
 
-public class LoginCommandValidator : AbstractValidator<LoginCommand>
+internal class LoginCommandValidator : AbstractValidator<LoginCommand>
 {
     public LoginCommandValidator()
     {
@@ -14,6 +14,6 @@ public class LoginCommandValidator : AbstractValidator<LoginCommand>
 
         RuleFor(c => c.Password)
             .NotEmpty()
-                .WithMessage("Пароль обязателен.");
+                .WithMessage(ValidationMessages.PasswordIsRequired);
     }
 }

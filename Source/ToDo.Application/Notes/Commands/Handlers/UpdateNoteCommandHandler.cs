@@ -5,7 +5,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.Notes.Commands.Handlers;
 
-public class UpdateNoteCommandHandler(INoteRepository noteRepository) : IRequestHandler<UpdateNoteCommand, Unit>
+internal class UpdateNoteCommandHandler(INoteRepository noteRepository) : IRequestHandler<UpdateNoteCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateNoteCommand request, CancellationToken cancellationToken)
     {

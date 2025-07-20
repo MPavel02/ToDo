@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ToDo.Application.Models.Auth;
 using ToDo.Domain.DomainEntities;
-using ToDo.Domain.Enums;
 using ToDo.Domain.Exceptions;
 using ToDo.Domain.Repositories;
 using ToDo.Domain.Services;
@@ -9,7 +8,7 @@ using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Application.Auth.Commands.Handlers;
 
-public class RegisterCommandHandler(
+internal class RegisterCommandHandler(
     IUserRepository userRepository,
     IPasswordHasher passwordHasher,
     ITokenService tokenService)

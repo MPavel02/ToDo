@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Application.Notes.Commands;
-using ToDo.Application.Notes.Queries.GetAllNotes;
-using ToDo.Application.Notes.Queries.GetNoteByID;
+using ToDo.Application.Notes.Queries;
 using ToDo.WebAPI.Models.Note;
 
 namespace ToDo.WebAPI.Controllers;

@@ -8,7 +8,7 @@ using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Application.Auth.Commands.Handlers;
 
-public class LoginCommandHandler(
+internal class LoginCommandHandler(
     IUserRepository userRepository,
     IPasswordHasher passwordHasher,
     ITokenService tokenService) : IRequestHandler<LoginCommand, AuthResult>

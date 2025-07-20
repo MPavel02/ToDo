@@ -6,7 +6,7 @@ using ToDo.Domain.ValueObjects;
 
 namespace ToDo.Application.Users.Commands.Handlers;
 
-public class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Guid>
+internal class CreateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Guid>
 {
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
