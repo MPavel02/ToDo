@@ -9,7 +9,7 @@ using ToDo.Domain.Services;
 
 namespace ToDo.Application.Services;
 
-public class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
+internal class JwtTokenService(IOptions<JwtOptions> options) : ITokenService
 {
     private readonly JwtOptions _settings = options.Value;
     

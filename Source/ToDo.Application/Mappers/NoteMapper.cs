@@ -16,7 +16,7 @@ internal static class NoteMapper
             UpdatedAt = noteDomain.UpdatedAt
         };
     }
-    
+
     public static NoteLookupDto MapToLookup(this NoteDomain noteDomain)
     {
         return new NoteLookupDto
@@ -25,12 +25,12 @@ internal static class NoteMapper
             Title = noteDomain.Title
         };
     }
-    
+
     public static ICollection<NoteDto> Map(this IEnumerable<NoteDomain> notes)
     {
         return notes.Select(Map).ToList();
     }
-        
+
     public static ICollection<NoteLookupDto> MapToLookup(this IEnumerable<NoteDomain> notes)
     {
         return notes.Select(MapToLookup).ToList();

@@ -5,7 +5,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.Application.BackgroundServices;
 
-public class LoggerBackgroundService(ILogQueue logQueue, IServiceProvider serviceProvider) : BackgroundService
+internal class LoggerBackgroundService(ILogQueue logQueue, IServiceProvider serviceProvider) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

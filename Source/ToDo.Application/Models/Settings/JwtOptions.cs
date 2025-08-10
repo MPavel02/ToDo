@@ -1,6 +1,6 @@
 ﻿namespace ToDo.Application.Models.Settings;
 
-public class JwtOptions
+internal class JwtOptions
 {
     public string TokenPrivateKey { get; set; }
     public string Issuer { get; set; }
