@@ -6,7 +6,7 @@ using ToDo.Domain.Services;
 
 namespace ToDo.Application.Services;
 
-public class LoggerService(ILogQueue logQueue) : ILoggerService
+internal class LoggerService(ILogQueue logQueue) : ILoggerService
 {
     public void LogAsync(
         LogLevel logLevel,

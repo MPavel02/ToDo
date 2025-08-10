@@ -6,7 +6,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.DAL.Repositories;
 
-public class NoteRepository(ToDoDbContext context) : INoteRepository
+internal class NoteRepository(ToDoDbContext context) : INoteRepository
 {
     public async Task<NoteDomain?> GetByIDAsync(Guid ID, CancellationToken cancellationToken = default)
     {

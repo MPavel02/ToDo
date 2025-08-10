@@ -8,12 +8,10 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder
     .AddBearerAuthentication()
-    .AddOptions()
     .AddSwagger()
     .AddDataAccess()
     .AddMediatr()
     .AddApplicationServices()
-    .AddBackgroundServices()
     .AddCors();
 
 var app = builder.Build();

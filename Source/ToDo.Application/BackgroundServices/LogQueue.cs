@@ -4,7 +4,7 @@ using ToDo.Domain.DomainEntities;
 
 namespace ToDo.Application.BackgroundServices;
 
-public class LogQueue : ILogQueue
+internal class LogQueue : ILogQueue
 {
     private readonly ConcurrentQueue<LogEntryDomain> _queue = new();
 

@@ -6,7 +6,7 @@ using ToDo.Domain.Repositories;
 
 namespace ToDo.DAL.ClickHouse.Logs.Repositories;
 
-public class LogRepository(LogsDbContext context) : ILogRepository
+internal class LogRepository(LogsDbContext context) : ILogRepository
 {
     public async Task<IEnumerable<LogEntryDomain>> GetAllBeforeDateAsync(DateTime receiptDate, CancellationToken cancellationToken = default)
     {

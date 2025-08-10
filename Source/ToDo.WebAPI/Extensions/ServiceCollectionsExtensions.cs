@@ -9,7 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ToDo.Application.BackgroundServices;
 using ToDo.Application.Models.Settings;
+using ToDo.Application.ServiceExtensions;
 using ToDo.Application.Services;
+using ToDo.DAL;
+using ToDo.DAL.ClickHouse.Logs;
 using ToDo.DAL.ClickHouse.Logs.Persistence;
 using ToDo.DAL.ClickHouse.Logs.Repositories;
 using ToDo.DAL.Persistence;
@@ -93,24 +96,10 @@ public static class ServiceCollectionsExtensions
         return builder;
     }
     
-    public static WebApplicationBuilder AddOptions(this WebApplicationBuilder builder)
-    {
-        builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Authentication"));
-
-        return builder;
-    }
-    
     public static WebApplicationBuilder AddDataAccess(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<ToDoDbContext>(opt =>
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresToDoConnection")));
-        
-        builder.Services.AddDbContext<LogsDbContext>(opt =>
-            opt.UseClickHouse(builder.Configuration.GetConnectionString("ClickHouseToDoLogsConnection")));
-        
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<INoteRepository, NoteRepository>();
-        builder.Services.AddScoped<ILogRepository, LogRepository>();
+        builder.Services.AddDataAccessPgServices(builder.Configuration);
+        builder.Services.AddDataAccessLogsClickHouseServices(builder.Configuration);
 
         return builder;
     }
@@ -129,18 +118,10 @@ public static class ServiceCollectionsExtensions
     
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
-        builder.Services.AddScoped<ITokenService, JwtTokenService>();
-        builder.Services.AddScoped<ILoggerService, LoggerService>();
+        builder.Services.AddTokenServices(builder.Configuration);
+        builder.Services.AddPasswordServices();
+        builder.Services.AddLoggerServices();
         
-        return builder;
-    }
-    
-    public static WebApplicationBuilder AddBackgroundServices(this WebApplicationBuilder builder)
-    {
-        builder.Services.AddSingleton<ILogQueue, LogQueue>();
-        builder.Services.AddHostedService<LoggerBackgroundService>();
-            
         return builder;
     }
     
