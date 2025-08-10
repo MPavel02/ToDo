@@ -30,7 +30,7 @@ internal static class NoteMapper
     {
         return notes.Select(Map).ToList();
     }
-    
+        
     public static ICollection<NoteLookupDto> MapToLookup(this IEnumerable<NoteDomain> notes)
     {
         return notes.Select(MapToLookup).ToList();
