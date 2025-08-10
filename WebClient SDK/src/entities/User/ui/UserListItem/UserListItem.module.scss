@@ -1,4 +1,8 @@
 .UserListItem {
+    .card {
+        border: 1px solid var(--accent-color);
+    }
+
     .infoWrapper {
         display: flex;
         align-items: center;

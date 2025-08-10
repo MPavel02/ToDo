@@ -1,6 +1,17 @@
 .UserDetails {
-    .details__title {
-        margin-bottom: 10px;
+    border: 1px var(--accent-color) solid;
+
+    .details__title__container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .details__body__container {
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px var(--accent-color) solid;
     }
 
     .property__row {

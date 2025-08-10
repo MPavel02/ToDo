@@ -6,7 +6,7 @@ import { Card } from 'shared/ui/Card/Card';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useEffect } from 'react';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
 import { getUserRole } from 'entities/User/model/types/user';
 import { getDateString } from 'shared/const/date';
@@ -25,14 +25,14 @@ export const UserDetails = (props: UserDetailsProps) => {
         className,
         id
     } = props;
-    
+
     const { t: tCommon } = useTranslation();
     const { t: tRoles } = useTranslation('roles');
 
     const dispatch = useAppDispatch();
 
     const user = useSelector(getUser);
-    
+
     useEffect(() => {
         dispatch(fetchUserDataByID(id));
     }, [dispatch, id]);
@@ -40,22 +40,23 @@ export const UserDetails = (props: UserDetailsProps) => {
     return (
         <DynamicModuleLoader reducers={reducers}>
             <Card className={classNames(cls.UserDetails, {}, [className])}>
-                <Text title={user?.username} className={cls.details__title}/>
-                <div className={cls.property__row}>
-                    <Text text={tCommon('Role')} />
-                    <p>-</p>
-                    <Text text={tRoles(getUserRole(user?.role))}/>
+                <div className={cls.details__title__container}>
+                    <Text title={user?.username} className={cls.details__title}/>
                 </div>
-                <div className={cls.property__row}>
-                    <Text text={tCommon('CreatedAt')} />
-                    <p>-</p>
-                    <Text text={getDateString(user?.createdAt)}/>
+                <div className={cls.details__body__container}>
+                    <div className={cls.property__row}>
+                        <Text theme={TextTheme.SECONDARY} text={tCommon('Role') + ':'} />
+                        <Text theme={TextTheme.SECONDARY} text={tRoles(getUserRole(user?.role))}/>
+                    </div>
+                    <div className={cls.property__row}>
+                        <Text theme={TextTheme.SECONDARY} text={tCommon('CreatedAt') + ':'} />
+                        <Text theme={TextTheme.SECONDARY} text={getDateString(user?.createdAt)}/>
+                    </div>
+                    {user?.updatedAt && <div className={cls.property__row}>
+                        <Text theme={TextTheme.SECONDARY} text={tCommon('UpdatedAt') + ':'} />
+                        <Text theme={TextTheme.SECONDARY} text={getDateString(user?.updatedAt)}/>
+                    </div>}
                 </div>
-                {user?.updatedAt && <div className={cls.property__row}>
-                    <Text text={tCommon('UpdatedAt')} />
-                    <p>-</p>
-                    <Text text={getDateString(user?.updatedAt)}/>
-                </div>}
             </Card>
         </DynamicModuleLoader>
     );

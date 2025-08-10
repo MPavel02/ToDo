@@ -18,7 +18,8 @@ export const UserListItem = memo((props: UserListItemProps) => {
         className,
         user
     } = props;
-    const { t } = useTranslation();
+    const { t: tCommon } = useTranslation();
+    const { t: tRoles } = useTranslation('roles');
 
     return (
         <Button
@@ -26,14 +27,14 @@ export const UserListItem = memo((props: UserListItemProps) => {
             to={RoutePath.user_details + user.id}
             className={classNames(cls.UserListItem, {}, [className])}
         >
-            <Card>
+            <Card className={cls.card}>
                 <div className={cls.infoWrapper}>
-                    <Text className={cls.infoTitle} text={t('Username') + ':'}/>
+                    <Text className={cls.infoTitle} text={tCommon('Username') + ':'}/>
                     <Text text={user.username}/>
                 </div>
                 <div className={cls.infoWrapper}>
-                    <Text className={cls.infoTitle} text={t('Role') + ':'}/>
-                    <Text text={t(getUserRole(user.role))}/>
+                    <Text className={cls.infoTitle} text={tCommon('Role') + ':'}/>
+                    <Text text={tRoles(getUserRole(user.role))}/>
                 </div>
             </Card>
         </Button>

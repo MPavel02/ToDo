@@ -6,6 +6,16 @@
     color: var(--important-color);
 }
 
+.secondary {
+    .title {
+        color: var(--secondary-color);
+    }
+
+    .text {
+        color: var(--secondary-color);
+    }
+}
+
 .error {
     .title {
         color: var(--red-light);
