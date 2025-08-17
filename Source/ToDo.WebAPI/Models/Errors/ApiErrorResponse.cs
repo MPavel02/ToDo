@@ -1,7 +1,5 @@
 ﻿namespace ToDo.WebAPI.Models.Errors;
 
-public class ApiErrorResponse
-{
-    public required string Message { get; set; }
-    public string? Description { get; set; }
-}
+public readonly record struct ApiErrorResponse(
+    string Message,
+    string? Description);

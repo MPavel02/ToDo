@@ -1,9 +1,7 @@
 ﻿namespace ToDo.WebAPI.Models.Note;
 
-public class UpdateNoteDto
-{
-    public required Guid ID { get; set; }
-    public required Guid UserID { get; set; }
-    public required string Title { get; set; }
-    public required string Details { get; set; }
-}
+public readonly record struct UpdateNoteDto(
+    Guid ID,
+    Guid UserID,
+    string Title,
+    string Details);

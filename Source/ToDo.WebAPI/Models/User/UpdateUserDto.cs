@@ -1,7 +1,5 @@
 ﻿namespace ToDo.WebAPI.Models.User;
 
-public class UpdateUserDto
-{
-    public Guid ID { get; set; }
-    public required string Username { get; set; }
-}
+public readonly record struct UpdateUserDto(
+    Guid ID,
+    string Username);
